@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  17 SEP 2022 20:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  30 SEP 2022 17:01
 entering extended mode
 **./Плазма.tex
 (Плазма.tex
@@ -807,74 +807,56 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <8> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
 LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <6> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
- [1
+<Двойной.png, id=40, 458.31226pt x 320.397pt>
+File: Двойной.png Graphic file (type png)
+<use Двойной.png>
+Package pdftex.def Info: Двойной.png  used on input line 59.
+(pdftex.def)             Requested size: 290.22107pt x 202.89738pt.
 
-{C:/Users/anna/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2]
-<Одиночный.png, id=91, 555.2745pt x 492.03825pt>
-File: Одиночный.png Graphic file (type png)
-<use Одиночный.png>
-Package pdftex.def Info: Одиночный.png  used on input line 139.
-(pdftex.def)             Requested size: 145.11053pt x 128.58011pt.
-<Зондовая_характеристика.png, id=94, 488.42474pt x 414.34
-8pt>
-File: Зондовая_характеристика.png Graphic file (type png)
 
-<use Зондовая_характеристика.png>
-Package pdftex.def Info: Зондовая_характеристика.png  use
-d on input line 145.
-(pdftex.def)             Requested size: 145.11053pt x 123.09776pt.
- [3 <./Одиночный.png> <./Зондовая_характеристика
-.png>]
-<Установка.png, id=110, 525.162pt x 260.172pt>
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[1
+
+{C:/Users/anna/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+<Установка.png, id=65, 525.162pt x 260.172pt>
 File: Установка.png Graphic file (type png)
 <use Установка.png>
-Package pdftex.def Info: Установка.png  used on input line 187.
+Package pdftex.def Info: Установка.png  used on input line 94.
 (pdftex.def)             Requested size: 290.22107pt x 143.77785pt.
-<U(I)_discharge.png, id=112, 578.16pt x 361.35pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<U(I)_discharge.png, id=67, 578.16pt x 361.35pt>
 File: U(I)_discharge.png Graphic file (type png)
 <use U(I)_discharge.png>
-Package pdftex.def Info: U(I)_discharge.png  used on input line 199.
+Package pdftex.def Info: U(I)_discharge.png  used on input line 106.
 (pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[4 <./Установка.png>]
-<I(U)_probe.png, id=134, 578.16pt x 361.35pt>
+[2 <./Двойной.png>] [3 <./Установка.png> <./U(I)_discharge.png>
+]
+<I(U)_probe.png, id=90, 578.16pt x 361.35pt>
 File: I(U)_probe.png Graphic file (type png)
 <use I(U)_probe.png>
-Package pdftex.def Info: I(U)_probe.png  used on input line 212.
+Package pdftex.def Info: I(U)_probe.png  used on input line 119.
 (pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<T,n(I_p).png, id=135, 578.16pt x 361.35pt>
+<T,n(I_p).png, id=91, 578.16pt x 361.35pt>
 File: T,n(I_p).png Graphic file (type png)
 <use T,n(I_p).png>
-Package pdftex.def Info: T,n(I_p).png  used on input line 235.
+Package pdftex.def Info: T,n(I_p).png  used on input line 142.
 (pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[5 <./U(I)_discharge.png>]
-
-LaTeX Warning: Text page 6 contains only floats.
-
-[6 <./I(U)_probe.png> <./T,n(I_p).png>]
-<Приложение.png, id=152, 487.8225pt x 497.4585pt>
+[4 <./I(U)_probe.png>]
+<Приложение.png, id=103, 487.8225pt x 497.4585pt>
 File: Приложение.png Graphic file (type png)
 <use Приложение.png>
-Package pdftex.def Info: Приложение.png  used on input line 247.
+Package pdftex.def Info: Приложение.png  used on input line 154.
 (pdftex.def)             Requested size: 241.84843pt x 246.62604pt.
-
-Overfull \hbox (6.20735pt too wide) in paragraph at lines 260--262
-\T2A/cmr/m/up/12 ����-��� ���-��-��� ��-���-��-��-���-�� ���-����-���-�� ���-��
--��-��-���� ��-��-��-�����: $\OML/cmm/m/it/12 I \OT1/cmr/m/n/12 = \OML/cmm/m/it
-/12 I[]th[]$\T2A/cmr/m/up/12 ,
- []
-
-[7 <./Приложение.png>] (Плазма.aux)
+ [5 <./T,n(I_p).png> <./Приложение.png>]
+[6] (Плазма.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -882,19 +864,19 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package rerunfilecheck Info: File `Плазма.out' has not changed.
-(rerunfilecheck)             Checksum: FE5FB4A297CB8C080704A8AE6F5F2556;2624.
+(rerunfilecheck)             Checksum: 1AF7E7C28B8A0C6A525432F7DE0131CE;1692.
  ) 
 Here is how much of TeX's memory you used:
- 13205 strings out of 478864
- 188667 string characters out of 2858520
- 527580 words of memory out of 3000000
- 30861 multiletter control sequences out of 15000+600000
+ 13156 strings out of 478864
+ 187568 string characters out of 2858520
+ 531313 words of memory out of 3000000
+ 30834 multiletter control sequences out of 15000+600000
  421557 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,10n,66p,918b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
- <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm060
-0.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx
-1440.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\l
+ 60i,12n,66p,927b,376s stack positions out of 5000i,500n,10000p,200000b,80000s
+ <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx144
+0.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm
+0600.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\l
 arm0800.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi60
 0\larm1200.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dp
 i600\labx1728.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a
@@ -904,12 +886,12 @@ cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
 C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Fi
 les/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fo
 nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-
-Output written on Плазма.pdf (7 pages, 701461 bytes).
+lic/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on Плазма.pdf (6 pages, 649008 bytes).
 PDF statistics:
- 429 PDF objects out of 1000 (max. 8388607)
- 49 named destinations out of 1000 (max. 500000)
- 148 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 350 PDF objects out of 1000 (max. 8388607)
+ 27 named destinations out of 1000 (max. 500000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 
