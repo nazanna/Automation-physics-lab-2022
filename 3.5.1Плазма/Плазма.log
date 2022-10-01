@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  30 SEP 2022 17:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  1 OCT 2022 22:56
 entering extended mode
 **./Плазма.tex
 (Плазма.tex
@@ -633,26 +633,26 @@ File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
 (Плазма.aux)
 \openout1 = `Плазма.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
  (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count289
@@ -708,7 +708,7 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 35.
+Package hyperref Info: Link coloring ON on input line 33.
 (C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
@@ -721,141 +721,138 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count295
 )
-LaTeX Info: Redefining \ref on input line 35.
-LaTeX Info: Redefining \pageref on input line 35.
-LaTeX Info: Redefining \nameref on input line 35.
+LaTeX Info: Redefining \ref on input line 33.
+LaTeX Info: Redefining \pageref on input line 33.
+LaTeX Info: Redefining \nameref on input line 33.
  (Плазма.out) (Плазма.out)
 \@outlinefile=\write3
 \openout3 = `Плазма.out'.
 
-LaTeX Info: Redefining \th on input line 35.
-LaTeX Font Info:    Trying to load font information for PD1+cmr on input line 3
-7.
-LaTeX Font Info:    No file PD1cmr.fd. on input line 37.
+LaTeX Info: Redefining \th on input line 33.
+ [1
+
+{C:/Users/anna/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+LaTeX Font Info:    Trying to load font information for PD1+cmr on input line 7
+3.
+LaTeX Font Info:    No file PD1cmr.fd. on input line 73.
 
 
 LaTeX Font Warning: Font shape `PD1/cmr/m/up' undefined
-(Font)              using `PD1/pdf/m/n' instead on input line 37.
+(Font)              using `PD1/pdf/m/n' instead on input line 73.
 
-LaTeX Font Info:    Trying to load font information for PU+cmr on input line 37
+LaTeX Font Info:    Trying to load font information for PU+cmr on input line 73
 .
-LaTeX Font Info:    No file PUcmr.fd. on input line 37.
+LaTeX Font Info:    No file PUcmr.fd. on input line 73.
 
 LaTeX Font Warning: Font shape `PU/cmr/m/up' undefined
-(Font)              using `PU/pdf/m/n' instead on input line 37.
+(Font)              using `PU/pdf/m/n' instead on input line 73.
 
 
 LaTeX Font Warning: Font shape `T2A/cmr/m/up' undefined
-(Font)              using `T2A/cmr/m/n' instead on input line 37.
+(Font)              using `T2A/cmr/m/n' instead on input line 73.
 
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 3
-7.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 7
+3.
 (C:\Program Files\MiKTeX\tex/latex/base\omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 
 LaTeX Font Warning: Font shape `OML/cmr/m/up' undefined
-(Font)              using `OML/cmr/m/it' instead on input line 37.
+(Font)              using `OML/cmr/m/it' instead on input line 73.
 
-LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <14.4> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 37.
-LaTeX Font Info:    Font shape `OML/cmr/m/up' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 37.
-LaTeX Font Info:    Font shape `OML/cmr/m/up' in size <7> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 37.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
-7.
+LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 73.
+LaTeX Font Info:    Font shape `OML/cmr/m/up' in size <8> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 73.
+LaTeX Font Info:    Font shape `OML/cmr/m/up' in size <6> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 73.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 7
+3.
 (C:\Program Files\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 
 LaTeX Font Warning: Font shape `OMS/cmr/m/up' undefined
-(Font)              using `OMS/cmr/m/n' instead on input line 37.
+(Font)              using `OMS/cmr/m/n' instead on input line 73.
 
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <14.4> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 37.
-LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 37.
-LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 37.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 37.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
+LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
+LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <6> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 73.
 
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 37.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 73.
 
 
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 37
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 73
 .
 
 (C:\Users\anna\AppData\Roaming\MiKTeX\tex/latex/wasysym\uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Font shape `OML/cmr/m/up' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 38.
-LaTeX Font Info:    Font shape `OML/cmr/m/up' in size <8> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 38.
-LaTeX Font Info:    Font shape `OML/cmr/m/up' in size <6> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 38.
-LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
-LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
-LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
-<Двойной.png, id=40, 458.31226pt x 320.397pt>
+<Двойной.png, id=50, 458.31226pt x 320.397pt>
 File: Двойной.png Graphic file (type png)
 <use Двойной.png>
-Package pdftex.def Info: Двойной.png  used on input line 59.
+Package pdftex.def Info: Двойной.png  used on input line 79.
 (pdftex.def)             Requested size: 290.22107pt x 202.89738pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.88 \end{equation}
+                    [1
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[1
-
-{C:/Users/anna/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-<Установка.png, id=65, 525.162pt x 260.172pt>
+ <./Двойной.png>]
+<Установка.png, id=70, 525.162pt x 260.172pt>
 File: Установка.png Graphic file (type png)
 <use Установка.png>
-Package pdftex.def Info: Установка.png  used on input line 94.
+Package pdftex.def Info: Установка.png  used on input line 115.
 (pdftex.def)             Requested size: 290.22107pt x 143.77785pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<U(I)_discharge.png, id=67, 578.16pt x 361.35pt>
+<U(I)_discharge.png, id=72, 578.16pt x 361.35pt>
 File: U(I)_discharge.png Graphic file (type png)
 <use U(I)_discharge.png>
-Package pdftex.def Info: U(I)_discharge.png  used on input line 106.
+Package pdftex.def Info: U(I)_discharge.png  used on input line 126.
 (pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
-[2 <./Двойной.png>] [3 <./Установка.png> <./U(I)_discharge.png>
-]
-<I(U)_probe.png, id=90, 578.16pt x 361.35pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[2]
+<I(U)_probe.png, id=93, 578.16pt x 361.35pt>
 File: I(U)_probe.png Graphic file (type png)
 <use I(U)_probe.png>
-Package pdftex.def Info: I(U)_probe.png  used on input line 119.
+Package pdftex.def Info: I(U)_probe.png  used on input line 139.
 (pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
-<T,n(I_p).png, id=91, 578.16pt x 361.35pt>
+ [3 <./Установка.png> <./U(I)_discharge.png>]
+<T,n(I_p).png, id=102, 578.16pt x 361.35pt>
 File: T,n(I_p).png Graphic file (type png)
 <use T,n(I_p).png>
-Package pdftex.def Info: T,n(I_p).png  used on input line 142.
+Package pdftex.def Info: T,n(I_p).png  used on input line 163.
 (pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[4 <./I(U)_probe.png>]
-<Приложение.png, id=103, 487.8225pt x 497.4585pt>
+<Приложение.png, id=106, 487.8225pt x 497.4585pt>
 File: Приложение.png Graphic file (type png)
 <use Приложение.png>
-Package pdftex.def Info: Приложение.png  used on input line 154.
+Package pdftex.def Info: Приложение.png  used on input line 175.
 (pdftex.def)             Requested size: 241.84843pt x 246.62604pt.
- [5 <./T,n(I_p).png> <./Приложение.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[4 <./I(U)_probe.png>] [5 <./T,n(I_p).png> <./Приложение.png>]
 [6] (Плазма.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -867,31 +864,32 @@ Package rerunfilecheck Info: File `Плазма.out' has not changed.
 (rerunfilecheck)             Checksum: 1AF7E7C28B8A0C6A525432F7DE0131CE;1692.
  ) 
 Here is how much of TeX's memory you used:
- 13156 strings out of 478864
- 187568 string characters out of 2858520
- 531313 words of memory out of 3000000
- 30834 multiletter control sequences out of 15000+600000
- 421557 words of font info for 77 fonts, out of 8000000 for 9000
+ 13128 strings out of 478864
+ 187161 string characters out of 2858520
+ 530396 words of memory out of 3000000
+ 30807 multiletter control sequences out of 15000+600000
+ 416905 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,12n,66p,927b,376s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,12n,66p,963b,376s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx144
 0.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm
 0600.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\l
 arm0800.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi60
-0\larm1200.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dp
-i600\labx1728.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a
+0\labx1728.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dp
+i600\larm2074.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a
 /dpi600\larm1440.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-
-t2a/dpi600\larm2074.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Fi
-les/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/c
-m/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Плазма.pdf (6 pages, 649008 bytes).
+t2a/dpi600\larm2488.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/
+lh-t2a/dpi600\larm1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pf
+b><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program
+ Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on Плазма.pdf (7 pages, 660871 bytes).
 PDF statistics:
- 350 PDF objects out of 1000 (max. 8388607)
- 27 named destinations out of 1000 (max. 500000)
+ 388 PDF objects out of 1000 (max. 8388607)
+ 28 named destinations out of 1000 (max. 500000)
  103 words of extra memory for PDF output out of 10000 (max. 10000000)
 
