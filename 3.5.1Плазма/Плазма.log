@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  1 OCT 2022 22:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  2 OCT 2022 00:01
 entering extended mode
 **./Плазма.tex
 (Плазма.tex
@@ -852,8 +852,11 @@ Package pdftex.def Info: Приложение.png  used on input line 175.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[4 <./I(U)_probe.png>] [5 <./T,n(I_p).png> <./Приложение.png>]
-[6] (Плазма.aux)
+[4 <./I(U)_probe.png>]
+
+LaTeX Warning: Text page 5 contains only floats.
+
+[5 <./T,n(I_p).png> <./Приложение.png>] [6] (Плазма.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -866,7 +869,7 @@ Package rerunfilecheck Info: File `Плазма.out' has not changed.
 Here is how much of TeX's memory you used:
  13128 strings out of 478864
  187161 string characters out of 2858520
- 530396 words of memory out of 3000000
+ 530437 words of memory out of 3000000
  30807 multiletter control sequences out of 15000+600000
  416905 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -887,9 +890,9 @@ b><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program
 public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfont
 s/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pf
 b><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Плазма.pdf (7 pages, 660871 bytes).
+Output written on Плазма.pdf (7 pages, 661571 bytes).
 PDF statistics:
- 388 PDF objects out of 1000 (max. 8388607)
+ 389 PDF objects out of 1000 (max. 8388607)
  28 named destinations out of 1000 (max. 500000)
  103 words of extra memory for PDF output out of 10000 (max. 10000000)
 
