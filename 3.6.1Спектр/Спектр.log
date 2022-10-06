@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  2 OCT 2022 11:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  6 OCT 2022 18:57
 entering extended mode
 **./Ð¡Ð¿ÐµÐºÑ‚Ñ€.tex
 (Ð¡Ð¿ÐµÐºÑ‚Ñ€.tex
@@ -733,207 +733,220 @@ LaTeX Info: Redefining \th on input line 33.
 
 {C:/Users/anna/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for PD1+cmr on input line 6
-1.
-LaTeX Font Info:    No file PD1cmr.fd. on input line 61.
+0.
+LaTeX Font Info:    No file PD1cmr.fd. on input line 60.
 
 
 LaTeX Font Warning: Font shape `PD1/cmr/m/up' undefined
-(Font)              using `PD1/pdf/m/n' instead on input line 61.
+(Font)              using `PD1/pdf/m/n' instead on input line 60.
 
-LaTeX Font Info:    Trying to load font information for PU+cmr on input line 61
+LaTeX Font Info:    Trying to load font information for PU+cmr on input line 60
 .
-LaTeX Font Info:    No file PUcmr.fd. on input line 61.
+LaTeX Font Info:    No file PUcmr.fd. on input line 60.
 
 LaTeX Font Warning: Font shape `PU/cmr/m/up' undefined
-(Font)              using `PU/pdf/m/n' instead on input line 61.
+(Font)              using `PU/pdf/m/n' instead on input line 60.
 
 
 LaTeX Font Warning: Font shape `T2A/cmr/m/up' undefined
-(Font)              using `T2A/cmr/m/n' instead on input line 61.
+(Font)              using `T2A/cmr/m/n' instead on input line 60.
 
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 6
-1.
+0.
 (C:\Program Files\MiKTeX\tex/latex/base\omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 
 LaTeX Font Warning: Font shape `OML/cmr/m/up' undefined
-(Font)              using `OML/cmr/m/it' instead on input line 61.
+(Font)              using `OML/cmr/m/it' instead on input line 60.
 
 LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 61.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 60.
 LaTeX Font Info:    Font shape `OML/cmr/m/up' in size <8> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 61.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 60.
 LaTeX Font Info:    Font shape `OML/cmr/m/up' in size <6> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 61.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 60.
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 6
-1.
+0.
 (C:\Program Files\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 
 LaTeX Font Warning: Font shape `OMS/cmr/m/up' undefined
-(Font)              using `OMS/cmr/m/n' instead on input line 61.
+(Font)              using `OMS/cmr/m/n' instead on input line 60.
 
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 61.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
 LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 61.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
 LaTeX Font Info:    Font shape `OMS/cmr/m/up' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 61.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
 
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
 
 
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 61
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 60
 .
 
 (C:\Users\anna\AppData\Roaming\MiKTeX\tex/latex/wasysym\uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
-<Ð¿Ñ€Ð¸Ð¼ÐµÑ€.png, id=33, 1783.8645pt x 334.851pt>
+<Ð¿Ñ€Ð¸Ð¼ÐµÑ€.png, id=32, 1783.8645pt x 334.851pt>
 File: Ð¿Ñ€Ð¸Ð¼ÐµÑ€.png Graphic file (type png)
 <use Ð¿Ñ€Ð¸Ð¼ÐµÑ€.png>
-Package pdftex.def Info: Ð¿Ñ€Ð¸Ð¼ÐµÑ€.png  used on input line 71.
+Package pdftex.def Info: Ð¿Ñ€Ð¸Ð¼ÐµÑ€.png  used on input line 70.
 (pdftex.def)             Requested size: 483.69687pt x 90.79417pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.89 \end{equation}
-                    [1
+l.92 \begin{equation}
+                      [1
 
  <./Ð¿Ñ€Ð¸Ð¼ÐµÑ€.png>]
-<1_1.jpg, id=57, 1284.8pt x 963.6pt>
+Overfull \hbox (26.29091pt too wide) detected at line 99
+\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 ) = \OML/c
+mm/m/it/12 f[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 ) + \OML/cmm/m
+/it/12 f[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 ) + \OML/cmm/m/it/
+12 f[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ;  f
+[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 ) = \OML/cmm/m/it/12 a[] [
+]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 ![]t\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ;  f[]
+\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 ) = [] [](\OML/cmm/m/it/12 !
+[] \OT1/cmr/m/n/12 + 
+)\OML/cmm/m/it/12 t;  f[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 ) =
+ [] [](\OML/cmm/m/it/12 ![] \OMS/cmsy/m/n/12   \OT1/cmr/m/n/12 
+)\OML/cmm/m/it/12 t
+ []
+
+<1_1.jpg, id=56, 1284.8pt x 963.6pt>
 File: 1_1.jpg Graphic file (type jpg)
 <use 1_1.jpg>
-Package pdftex.def Info: 1_1.jpg  used on input line 105.
+Package pdftex.def Info: 1_1.jpg  used on input line 113.
 (pdftex.def)             Requested size: 227.3381pt x 170.49985pt.
-<1_2.jpg, id=58, 1284.8pt x 963.6pt>
+<1_2.jpg, id=57, 1284.8pt x 963.6pt>
 File: 1_2.jpg Graphic file (type jpg)
 <use 1_2.jpg>
-Package pdftex.def Info: 1_2.jpg  used on input line 109.
+Package pdftex.def Info: 1_2.jpg  used on input line 117.
 (pdftex.def)             Requested size: 227.3381pt x 170.49985pt.
-<1_3.jpg, id=59, 1284.8pt x 963.6pt>
+<1_3.jpg, id=58, 1284.8pt x 963.6pt>
 File: 1_3.jpg Graphic file (type jpg)
 <use 1_3.jpg>
-Package pdftex.def Info: 1_3.jpg  used on input line 113.
+Package pdftex.def Info: 1_3.jpg  used on input line 122.
 (pdftex.def)             Requested size: 227.3381pt x 170.49985pt.
-<1_4.jpg, id=60, 1284.8pt x 963.6pt>
+<1_4.jpg, id=59, 1284.8pt x 963.6pt>
 File: 1_4.jpg Graphic file (type jpg)
 <use 1_4.jpg>
-Package pdftex.def Info: 1_4.jpg  used on input line 117.
+Package pdftex.def Info: 1_4.jpg  used on input line 126.
 (pdftex.def)             Requested size: 227.3381pt x 170.49985pt.
-<dnu(tau).png, id=62, 578.16pt x 361.35pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[2 <./1_1.jpg> <./1_2.jpg>]
+<dnu(tau).png, id=74, 578.16pt x 361.35pt>
 File: dnu(tau).png Graphic file (type png)
 <use dnu(tau).png>
-Package pdftex.def Info: dnu(tau).png  used on input line 127.
-(pdftex.def)             Requested size: 411.14528pt x 256.9628pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<a(n).png, id=63, 722.7pt x 433.62pt>
+Package pdftex.def Info: dnu(tau).png  used on input line 137.
+(pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
+<a(n).png, id=75, 722.7pt x 433.62pt>
 File: a(n).png Graphic file (type png)
 <use a(n).png>
-Package pdftex.def Info: a(n).png  used on input line 133.
-(pdftex.def)             Requested size: 411.14528pt x 246.68958pt.
+Package pdftex.def Info: a(n).png  used on input line 143.
+(pdftex.def)             Requested size: 483.69687pt x 290.21953pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[2 <./1_1.jpg> <./1_2.jpg> <./1_3.jpg> <./1_4.jpg>] [3 <./dnu(tau).png> <./a(n)
-.png>]
-Overfull \hbox (8.49716pt too wide) in paragraph at lines 148--148
+[3 <./1_3.jpg> <./1_4.jpg> <./dnu(tau).png>] [4 <./a(n).png>]
+Overfull \hbox (8.49716pt too wide) in paragraph at lines 160--160
 |\T2A/cmr/bx/n/14.4 Èññëåäîâàíèå ñïåê-òðà ïå-ðè-î-äè-÷å-ñêîé ïî-ñëå-äî-âà-òåëü-
 íî-ñòè öó-ãîâ ãàð-
  []
 
-<2_1.jpg, id=88, 1284.8pt x 963.6pt>
+<2_1.jpg, id=93, 1284.8pt x 963.6pt>
 File: 2_1.jpg Graphic file (type jpg)
 <use 2_1.jpg>
-Package pdftex.def Info: 2_1.jpg  used on input line 152.
+Package pdftex.def Info: 2_1.jpg  used on input line 164.
 (pdftex.def)             Requested size: 227.3381pt x 170.49985pt.
-<2_2.jpg, id=89, 1284.8pt x 963.6pt>
+<2_2.jpg, id=94, 1284.8pt x 963.6pt>
 File: 2_2.jpg Graphic file (type jpg)
 <use 2_2.jpg>
-Package pdftex.def Info: 2_2.jpg  used on input line 156.
+Package pdftex.def Info: 2_2.jpg  used on input line 168.
 (pdftex.def)             Requested size: 227.3381pt x 170.49985pt.
-<2_3.jpg, id=90, 1284.8pt x 963.6pt>
+<2_3.jpg, id=95, 1284.8pt x 963.6pt>
 File: 2_3.jpg Graphic file (type jpg)
 <use 2_3.jpg>
-Package pdftex.def Info: 2_3.jpg  used on input line 160.
+Package pdftex.def Info: 2_3.jpg  used on input line 172.
 (pdftex.def)             Requested size: 227.3381pt x 170.49985pt.
-<2_4.jpg, id=91, 1284.8pt x 963.6pt>
+<2_4.jpg, id=96, 1284.8pt x 963.6pt>
 File: 2_4.jpg Graphic file (type jpg)
 <use 2_4.jpg>
-Package pdftex.def Info: 2_4.jpg  used on input line 164.
+Package pdftex.def Info: 2_4.jpg  used on input line 176.
 (pdftex.def)             Requested size: 227.3381pt x 170.49985pt.
-<2_5.jpg, id=92, 1284.8pt x 963.6pt>
+<2_5.jpg, id=97, 1284.8pt x 963.6pt>
 File: 2_5.jpg Graphic file (type jpg)
 <use 2_5.jpg>
-Package pdftex.def Info: 2_5.jpg  used on input line 168.
+Package pdftex.def Info: 2_5.jpg  used on input line 180.
 (pdftex.def)             Requested size: 227.3381pt x 170.49985pt.
-[4 <./2_1.jpg> <./2_2.jpg> <./2_3.jpg> <./2_4.jpg> <./2_5.jpg>]
-<T(dnu).png, id=100, 578.16pt x 361.35pt>
+[5 <./2_1.jpg> <./2_2.jpg> <./2_3.jpg> <./2_4.jpg> <./2_5.jpg>]
+<T(dnu).png, id=105, 578.16pt x 361.35pt>
 File: T(dnu).png Graphic file (type png)
 <use T(dnu).png>
-Package pdftex.def Info: T(dnu).png  used on input line 180.
+Package pdftex.def Info: T(dnu).png  used on input line 192.
 (pdftex.def)             Requested size: 435.32422pt x 272.07599pt.
-<3.jpg, id=103, 784.9325pt x 534.99875pt>
+<3.jpg, id=108, 784.9325pt x 534.99875pt>
 File: 3.jpg Graphic file (type jpg)
 <use 3.jpg>
-Package pdftex.def Info: 3.jpg  used on input line 192.
-(pdftex.def)             Requested size: 411.14528pt x 280.23364pt.
+Package pdftex.def Info: 3.jpg  used on input line 203.
+(pdftex.def)             Requested size: 362.77264pt x 247.26161pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<a(m).png, id=105, 578.16pt x 361.35pt>
+<a(m).png, id=110, 578.16pt x 361.35pt>
 File: a(m).png Graphic file (type png)
 <use a(m).png>
-Package pdftex.def Info: a(m).png  used on input line 204.
-(pdftex.def)             Requested size: 435.32422pt x 272.07599pt.
+Package pdftex.def Info: a(m).png  used on input line 215.
+(pdftex.def)             Requested size: 362.77264pt x 226.73091pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[5 <./T(dnu).png>] [6 <./3.jpg> <./a(m).png>] [7] (Ð¡Ð¿ÐµÐºÑ‚Ñ€.aux)
+[6 <./T(dnu).png>] [7 <./3.jpg> <./a(m).png>] [8] (Ð¡Ð¿ÐµÐºÑ‚Ñ€.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `Ð¡Ð¿ÐµÐºÑ‚Ñ€.out' has not changed.
-(rerunfilecheck)             Checksum: E7198F9236092A5525A5384A7FD4D6BE;767.
+(rerunfilecheck)             Checksum: 62CAAD27F24A89706EC59A1D6CCE83A9;751.
  ) 
 Here is how much of TeX's memory you used:
- 13231 strings out of 478864
- 187844 string characters out of 2858520
+ 13234 strings out of 478864
+ 187874 string characters out of 2858520
  525647 words of memory out of 3000000
  30907 multiletter control sequences out of 15000+600000
  416905 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,8n,66p,1139b,376s stack positions out of 5000i,500n,10000p,200000b,80000s
- <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm080
-0.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx
-1440.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\l
+ 60i,8n,66p,1076b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
+ <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx144
+0.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm
+0800.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\l
 abx1728.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi60
 0\larm2074.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dp
-i600\larm1440.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a
-/dpi600\larm2488.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-
-t2a/dpi600\larm1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Fi
-les/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fo
-nts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb>
-Output written on Ð¡Ð¿ÐµÐºÑ‚Ñ€.pdf (8 pages, 2483421 bytes).
+i600\larm2488.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a
+/dpi600\larm1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cme
+x10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/
+Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb>
+Output written on Ð¡Ð¿ÐµÐºÑ‚Ñ€.pdf (9 pages, 2483687 bytes).
 PDF statistics:
- 377 PDF objects out of 1000 (max. 8388607)
- 29 named destinations out of 1000 (max. 500000)
+ 375 PDF objects out of 1000 (max. 8388607)
+ 32 named destinations out of 1000 (max. 500000)
  116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
