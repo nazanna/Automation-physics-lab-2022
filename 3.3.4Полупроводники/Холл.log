@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  14 OCT 2022 20:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  15 OCT 2022 22:27
 entering extended mode
 **./Холл.tex
 (Холл.tex
@@ -801,7 +801,7 @@ File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 <мостик.png, id=33, 242.70676pt x 192.72pt>
 File: мостик.png Graphic file (type png)
 <use мостик.png>
-Package pdftex.def Info: мостик.png  used on input line 94.
+Package pdftex.def Info: мостик.png  used on input line 97.
 (pdftex.def)             Requested size: 266.03474pt x 211.25746pt.
 
 
@@ -811,31 +811,31 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.105 \begin{equation}
+l.108 \begin{equation}
                        [1
 
 ]
-<Установка.png, id=53, 478.78876pt x 452.892pt>
+<Установка.png, id=54, 478.78876pt x 452.892pt>
 File: Установка.png Graphic file (type png)
 <use Установка.png>
-Package pdftex.def Info: Установка.png  used on input line 113.
+Package pdftex.def Info: Установка.png  used on input line 116.
 (pdftex.def)             Requested size: 266.03474pt x 251.64827pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Градуировка.png, id=55, 578.16pt x 361.35pt>
+<Градуировка.png, id=56, 578.16pt x 361.35pt>
 File: Градуировка.png Graphic file (type png)
 <use Градуировка.png>
-Package pdftex.def Info: Градуировка.png  used on input line 123.
+Package pdftex.def Info: Градуировка.png  used on input line 126.
 (pdftex.def)             Requested size: 483.69687pt x 302.30788pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<E(B).png, id=57, 722.7pt x 433.62pt>
+<E(B).png, id=58, 722.7pt x 433.62pt>
 File: E(B).png Graphic file (type png)
 <use E(B).png>
-Package pdftex.def Info: E(B).png  used on input line 132.
+Package pdftex.def Info: E(B).png  used on input line 135.
 (pdftex.def)             Requested size: 459.51054pt x 275.70955pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -845,10 +845,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: Text page 3 contains only floats.
 
 [3 <./Установка.png> <./Градуировка.png>]
-<K(I).png, id=75, 578.16pt x 361.35pt>
+<K(I).png, id=76, 578.16pt x 361.35pt>
 File: K(I).png Graphic file (type png)
 <use K(I).png>
-Package pdftex.def Info: K(I).png  used on input line 141.
+Package pdftex.def Info: K(I).png  used on input line 144.
 (pdftex.def)             Requested size: 459.51054pt x 287.19469pt.
 
 
@@ -858,16 +858,13 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `Холл.out' has not changed.
 (rerunfilecheck)             Checksum: 62CAAD27F24A89706EC59A1D6CCE83A9;751.
  ) 
 Here is how much of TeX's memory you used:
  13106 strings out of 478864
  186634 string characters out of 2858520
- 527691 words of memory out of 3000000
+ 526691 words of memory out of 3000000
  30788 multiletter control sequences out of 15000+600000
  416905 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -886,9 +883,9 @@ Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files
 amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
 sy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/
 Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Холл.pdf (6 pages, 766952 bytes).
+Output written on Холл.pdf (6 pages, 767127 bytes).
 PDF statistics:
- 338 PDF objects out of 1000 (max. 8388607)
+ 339 PDF objects out of 1000 (max. 8388607)
  25 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

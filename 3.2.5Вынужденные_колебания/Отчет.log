@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  15 OCT 2022 22:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.8.13)  17 OCT 2022 08:33
 entering extended mode
 **./Отчет.tex
 (Отчет.tex
@@ -801,7 +801,7 @@ File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 <затухание.png, id=32, 479.391pt x 283.65974pt>
 File: затухание.png Graphic file (type png)
 <use затухание.png>
-Package pdftex.def Info: затухание.png  used on input line 79.
+Package pdftex.def Info: затухание.png  used on input line 80.
 (pdftex.def)             Requested size: 266.03474pt x 157.4157pt.
 
 
@@ -811,14 +811,14 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.93 \begin{equation}
+l.94 \begin{equation}
                       [1
 
 ]
 <установка.png, id=58, 522.15076pt x 262.581pt>
 File: установка.png Graphic file (type png)
 <use установка.png>
-Package pdftex.def Info: установка.png  used on input line 110.
+Package pdftex.def Info: установка.png  used on input line 111.
 (pdftex.def)             Requested size: 459.51054pt x 231.088pt.
 
 
@@ -828,17 +828,8 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <graf.png, id=68, 578.16pt x 361.35pt>
 File: graf.png Graphic file (type png)
 <use graf.png>
-Package pdftex.def Info: graf.png  used on input line 125.
+Package pdftex.def Info: graf.png  used on input line 126.
 (pdftex.def)             Requested size: 459.51054pt x 287.19469pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -847,20 +838,17 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `Отчет.out' has not changed.
 (rerunfilecheck)             Checksum: 62CAAD27F24A89706EC59A1D6CCE83A9;751.
  ) 
 Here is how much of TeX's memory you used:
  13087 strings out of 478864
  186412 string characters out of 2858520
- 529391 words of memory out of 3000000
+ 530391 words of memory out of 3000000
  30771 multiletter control sequences out of 15000+600000
  416905 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,11n,66p,1265b,386s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,11n,66p,1214b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm080
 0.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx
 1440.pk> <C:\Users\anna\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\l
@@ -876,7 +864,7 @@ Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files
 mr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
 Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files
 /MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on Отчет.pdf (6 pages, 371193 bytes).
+Output written on Отчет.pdf (6 pages, 371151 bytes).
 PDF statistics:
  363 PDF objects out of 1000 (max. 8388607)
  23 named destinations out of 1000 (max. 500000)
