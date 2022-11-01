@@ -1,5 +1,7 @@
 import os
 import sys
+import csv
+import time
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import (QHBoxLayout,
@@ -27,7 +29,8 @@ from PyQt6.QtWidgets import (QHBoxLayout,
     QGridLayout,
     QMenu,
     QTableWidgetItem,
-
+    QHeaderView,
+    
     )
 
 
@@ -128,7 +131,12 @@ class StartWindow(AbstractWindow):
         self.parent.change_number()
 
     def enter_name(self):
+        # make folder
         self.parent.foldername = self.lineEdit.text()
+        self.parent.folder = os.path.join(os.getcwd(), self.parent.foldername)
+        if not os.path.exists(self.parent.folder):
+            os.mkdir(self.parent.folder)
+        
         self.flow.setEnabled(True)
         self.main.setEnabled(True)
         self.lineEdit.setReadOnly(True)
@@ -136,6 +144,7 @@ class StartWindow(AbstractWindow):
 
 class MainExperiment1Window(AbstractWindow):
     def __init__(self, parent):
+        # TODO : clean code
         super().__init__()
 
         self.setWindowTitle('Основной эксперимент')
@@ -143,44 +152,84 @@ class MainExperiment1Window(AbstractWindow):
         self.parent = parent
         
         # make masthead
-        self.dataname = 'data.txt'
-        file = open(os(self.parent.foldername, self.dataname), 'w')
-        file.write('I_0, mA U_34, mV t, s')
-        file.close()
+        self.dataname = 'data.csv'
+        head_1 = 'I_0,mA'
+        head_2 = 'U_34,mV'
+        head_3 = 't,s'
+        with open(os.path.join(self.parent.folder, self.dataname), 'w') as file:
+            wr = csv.writer(file)
+            wr.writerow([head_1, head_2, head_3])
+        
         
         self.centralwidget = QWidget()
         self.resize(1400, 800)
         self.setCentralWidget(self.centralwidget)
 
-        self.but = QPushButton('Измерение')
-        # self.but.clicked.connect(self.but_click)
-        self.setCentralWidget(self.but)
+        self.start = QPushButton('Старт')
+        self.start.clicked.connect(self.start_clicked_nodata)
+        self.start.setEnabled(False)
+        
+        self.stop  = QPushButton('Стоп')
+        self.stop.clicked.connect(self.stop_clicked)
+        self.stop.setEnabled(False)
 
-        grid_layout = QGridLayout(self)         # Create QGridLayout
-        self.centralwidget.setLayout(grid_layout)   # Set this layout in central widget
+        grid_layout = QGridLayout(self.centralwidget)
 
-        table = QTableWidget(self)  # Create a table
-        table.setColumnCount(3)     #Set three columns
-        table.setRowCount(1)        # and one row
+        self.table = QTableWidget(self)  # Create a self.table
+        self.table.setColumnCount(3)     #Set three columns
+        self.table.setRowCount(0)      
 
-          # Set the table headers
-        table.setHorizontalHeaderLabels(["Header 1", "Header 2", "Header 3"])
+        self.table.setHorizontalHeaderLabels([head_1, head_2, head_3])
+        
+        header = self.table.horizontalHeader() 
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        self.table.setItem(0, 0, QTableWidgetItem("Text in column 1"))
+        self.table.setItem(0, 1, QTableWidgetItem("Text in column 2"))
+        self.table.setItem(0, 2, QTableWidgetItem("Text in column 3"))
+        self.table.resizeColumnsToContents()
+        
+        
+        self.lineEdit = QLineEdit(placeholderText='Введите что-то')
+        self.lineEdit.returnPressed.connect(self.enter_smth)
 
-          #Set the tooltips to headings
-        table.horizontalHeaderItem(0).setToolTip("Column 1 ")
-        table.horizontalHeaderItem(1).setToolTip("Column 2 ")
-        table.horizontalHeaderItem(2).setToolTip("Column 3 ")
-        table.setItem(0, 0, QTableWidgetItem("Text in column 1"))
-        table.setItem(0, 1, QTableWidgetItem("Text in column 2"))
-        table.setItem(0, 2, QTableWidgetItem("Text in column 3"))
+        grid_layout.addWidget(self.table, 0, 0, 2, 1)   # Adding the table to the grid
+        grid_layout.addWidget(self.lineEdit, 0, 2, -1, -1)
+        grid_layout.addWidget(self.start, 1, 2)
+        grid_layout.addWidget(self.stop, 1, 3)
 
-          # Do the resize of the columns by content
-        table.resizeColumnsToContents()
+        
+        self.parent.draw()
+    
+    def enter_smth(self):
+        # TODO
+        self.parent.smth = self.lineEdit.text()
+        self.start.setEnabled(True)
+        self.lineEdit.setReadOnly(True)
+        
+    def start_clicked_nodata(self):
+        # function to test writing data
+        current_time = round(time.time()*1000)
+        v = str(current_time/60)
+        a=v
+        t = str(current_time-self.start_time)
+        with open(os.path.join(self.parent.folder, self.dataname), 'a') as file:
+            wr = csv.writer(file)
+            wr.writerow([v, a, str(current_time-self.start_time)])
+        self.table.insertRow(self.table.rowCount())
+        self.table.setItem(self.table.rowCount()-1, 0, QTableWidgetItem(v))
+        self.table.setItem(self.table.rowCount()-1, 1, QTableWidgetItem(a))
+        self.table.setItem(self.table.rowCount()-1, 2, QTableWidgetItem(t))
+        
+        self.stop.setEnabled(True)
+    
+    def stop_clicked(self):
+        # TODO
+        print('stop')
+        self.stop.setEnabled(False)
 
-        grid_layout.addWidget(table, 0, 0)   # Adding the table to the grid
-        grid_layout.addWidget(self.but, 0, 3)
-
-    def but_click(self):
+    def start_click(self):
         # measure voltage and current
         volt_name = os.path.join('/dev', 'usbtmc1')
         f_volt = open(volt_name, 'w')
@@ -199,34 +248,34 @@ class MainExperiment1Window(AbstractWindow):
         f_amp.close()
         current_time = round(time.time()*1000)
         s = v + a + str(current_time - self.start_time)
-        out = open(os(self.parent.foldername, self.dataname), 'a')
-        out.write(s)
-        out.close()
+        with open(os.path.join(self.parent.folder, self.dataname), 'a') as file:
+            wr = csv.writer(file)
+            wr.writerow([v, a, str(current_time-self.start_time)])
 
+start = Start()
 
-# start = Start()
-# del start
-
-
-import time
-import serial
-
-ser=serial.Serial(
-    port='/dev/ttyUSB0',
-    baudrate=9600,
-    timeout=1
-)
-ser.isOpen()
-
-msg='SYSTem:REMote\n'
-ser.write(msg.encode('ascii'))
-
-while 1:
-
-        msg='Read?\n'
-        ser.write(msg.encode('ascii'))
-        time.sleep(1)
-
-        bytesToRead=ser.inWaiting()
-        data=ser.read(bytesToRead)
-        print(data)
+# =============================================================================
+# import time
+# import serial
+# 
+# ser=serial.Serial(
+#     port='/dev/ttyUSB0',
+#     baudrate=9600,
+#     timeout=1
+# )
+# ser.isOpen()
+# 
+# msg='SYSTem:REMote\n'
+# ser.write(msg.encode('ascii'))
+# 
+# while 1:
+# 
+#         msg='Read?\n'
+#         ser.write(msg.encode('ascii'))
+#         time.sleep(1)
+# 
+#         bytesToRead=ser.inWaiting()
+#         data=ser.read(bytesToRead)
+#         print(data)
+# 
+# =============================================================================
