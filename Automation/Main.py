@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import time
+import pandas as pd
 from PyQt6 import QtCore
 from PyQt6.QtGui import QAction,  QIcon, QPixmap
 from PyQt6.QtWidgets import (QHBoxLayout,
@@ -176,11 +177,11 @@ class MainExperimentDataWindow(AbstractWindow):
         self.resize(1400, 800)
 
         # make masthead
-        self.dataname = 'data.csv'
+        self.parent.dataname = 'data.csv'
         head_1 = 'I_0,mA'
         head_2 = 'U_34,mV'
         head_3 = 't,s'
-        with open(os.path.join(self.parent.folder, self.dataname), 'w') as file:
+        with open(os.path.join(self.parent.folder, self.parent.dataname), 'w') as file:
             wr = csv.writer(file)
             wr.writerow([head_1, head_2, head_3])
 
@@ -246,7 +247,7 @@ class MainExperimentDataWindow(AbstractWindow):
         v = str((current_time-self.start_time)/60)
         a = v
         t = str(current_time-self.start_time)
-        with open(os.path.join(self.parent.folder, self.dataname), 'a') as file:
+        with open(os.path.join(self.parent.folder, self.parent.dataname), 'a') as file:
             wr = csv.writer(file)
             wr.writerow([v, a, str(current_time-self.start_time)])
         self.table.insertRow(self.table.rowCount())
@@ -281,7 +282,7 @@ class MainExperimentDataWindow(AbstractWindow):
         f_volt.close()
         f_amp.close()
         current_time = round(time.time()*1000)
-        with open(os.path.join(self.parent.folder, self.dataname), 'a') as file:
+        with open(os.path.join(self.parent.folder, self.parent.dataname), 'a') as file:
             wr = csv.writer(file)
             wr.writerow([v, a, str(current_time-self.start_time)])
 
@@ -290,14 +291,22 @@ class MainExperimentChartWindow(AbstractWindow):
     def __init__(self, parent):
         super().__init__()
 
-        self.setWindowTitle('Основной эксперимент. Обработка данных')
         self.parent = parent
+        self.parent.chartname = 'Chart'
+        self.parent.data = Data(data_filename=os.path.join(self.parent.folder, self.parent.dataname), 
+                                saving=os.path.join(self.parent.folder, self.parent.chartname))
+        self.parent.data.read_csv()
+        self.parent.data.x=self.parent.data.data['I_0,mA']
+        self.parent.data.y=self.parent.data.data['U_34,mV']
+        self.parent.data.make_grafic()
+        
+        self.setWindowTitle('Основной эксперимент. Обработка данных')
         self.resize(1400, 800)
 
         self.centralwidget = QWidget()
         self.setCentralWidget(self.centralwidget)
 
-        pixmap = QPixmap('arrow.png')
+        pixmap = QPixmap(os.path.join(self.parent.folder, self.parent.chartname))
         self.label = QLabel(self)
         self.label.setPixmap(pixmap)
         self.label.resize(pixmap.width(), pixmap.height())
@@ -310,25 +319,23 @@ class MainExperimentChartWindow(AbstractWindow):
         self.hbox_layout.addWidget(self.text, 0, 1)
 
 
+
+
+
 class Data:
-    def __init__(self, x, y, xlabel, ylabel, caption, xerr, yerr, through_0,
-                 data_filename, color=None, centering=None, size=15, 
-                 coefficient=[0.9, 1.1]):
+    def __init__(self, x=[], y=[], xlabel='', ylabel='', caption='', xerr=None, 
+                 yerr=None, through_0=0, data_filename='', color=None, 
+                 centering=None, size=15, coefficient=[0.9, 1.1], saving=None):
         self.x = x
         self.y = y
         self.xlabel = xlabel
         self.ylabel = ylabel
         self.caption = caption
-        if type(yerr) == float or type(yerr) == int:
-            self.yerr = [yerr for _ in self.y]
-        else: 
-            self.yerr = yerr
-        if type(xerr) == float or type(xerr) == int:
-            self.xerr = [xerr for _ in self.x]
-        else: 
-            self.xerr = xerr
+        self.xerr=xerr
+        self.yerr=yerr
+        self.make_errors(xerr, yerr)
         self.through_0 = through_0
-        if not self.color:
+        if not color:
             self.color = ['limegreen', 'indigo']
         else:
             self.color = color
@@ -336,13 +343,33 @@ class Data:
         self.size = size
         self.coefficient = coefficient
         self.data_filename=data_filename
+        self.saving=saving
         
+    def make_errors(self, xerr=None, yerr=None):
+        if not xerr: xerr=self.xerr
+        if not yerr: yerr=self.yerr
+        if not xerr: xerr=0
+        if not yerr: yerr=0
+        if not yerr or type(yerr) == float or type(yerr) == int:
+            self.yerr = [yerr for _ in self.y]
+        else: 
+            self.yerr = yerr
+        if not xerr or type(xerr) == float or type(xerr) == int:
+            self.xerr = [xerr for _ in self.x]
+        else: 
+            self.xerr = xerr
+    
     def read_csv(self):
         with open(self.data_filename) as file:
-            reader = list(csv.reader(file, delimiter=';',
-                          quotechar=',', quoting=csv.QUOTE_MINIMAL))
+            reader = list(csv.reader(file))
         data = np.array(reader)
-        data = np.transpose(data)
+        dic=[]
+        for i in range(len(data[0])):
+            micro_data = []
+            for j in range(len(data)):
+                micro_data.append(data[j][i])
+            dic.append(micro_data)
+        data=dic
         dic = {}
         for i in range(len(data)):
             dic[data[i][0]] = np.array(data[i][1:]).astype(np.float)
@@ -350,15 +377,15 @@ class Data:
         self.data=data
 
     def make_point_grafic(self):
-
+        self.make_errors()
         if self.xerr[1] != 0 or self.yerr[1] != 0:
             plt.errorbar(self.x, self.y, yerr=self.yerr, xerr=self.xerr, linewidth=4,
-                         linestyle='', label=self.caption, color=self.color,
-                         ecolor=self.color, elinewidth=1, capsize=3.4,
+                         linestyle='', label=self.caption, color=self.color[0],
+                         ecolor=self.color[0], elinewidth=1, capsize=3.4,
                          capthick=1.4)
         else:
             plt.scatter(self.x, self.y, linewidth=0.005, label=self.caption,
-                        color=self.color, edgecolor='black', s=self.size)
+                        color=self.color[0], edgecolor='black', s=self.size)
 
         if not self.centering:
             plt.xlabel(self.xlabel)
@@ -373,7 +400,7 @@ class Data:
             self.ax.set_ylabel(self.xlabel, labelpad=-260,
                                rotation=0, fontsize=14)
 
-    def make_line_grafic(self, k, b,):
+    def make_line_grafic(self, k, b):
         if min(self.x) > 0:
             xmin = min(self.x)*self.coefficient[0]
         else:
@@ -385,10 +412,10 @@ class Data:
             xmax = max(self.x)*self.coefficient[0]
         x = np.arange(xmin, xmax, (xmax-xmin)/10000)
         plt.plot(x, k*x+b, label=self.caption, linewidth=2.4,
-                 linestyle='-')
+                 linestyle='-', color=self.color[1])
 
-    def make_graffic(self, named_by_points=True):
-
+    def make_grafic(self, named_by_points=True):        
+        self.make_errors()
         if named_by_points:
             cap_point = self.caption
             line_point = None
@@ -396,6 +423,7 @@ class Data:
             line_point = self.caption
             cap_point = None
         self.make_point_grafic()
+        
         k, b, sigma = self.approx()
         sigma[0] = abs(k*((sigma[0]/k)**2+(np.mean(self.yerr)/np.mean(self.y))**2 +
                           (np.mean(self.xerr)/np.mean(self.x))**2)**0.5)
@@ -405,15 +433,17 @@ class Data:
         else:
             sigma[1] = 0
 
-        self.make_line_grafic()
+        self.make_line_grafic(k, b)
         plt.legend()
+        if self.saving:
+            plt.savefig(self.saving)
         return k, b, sigma
 
     def approx(self):
         if self.yerr[0] != 0:
-            sigma_y = [1/i**2 for i in self.yerr]
+            sigma_y = [1/i**2 for i in self.y]
         else:
-            sigma_y = np.array([1 for _ in self.yerr])
+            sigma_y = np.array([1 for _ in self.y])
         if self.through_0 == 0:
             def f(x, k):
                 return k*x
