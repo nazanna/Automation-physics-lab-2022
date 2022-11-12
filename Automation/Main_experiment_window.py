@@ -10,36 +10,18 @@ import csv
 import time
 from PyQt6 import QtCore
 from PyQt6.QtGui import QIcon, QPixmap
-from PyQt6.QtWidgets import (QHBoxLayout,
-                             QApplication,
-                             QCheckBox,
-                             QComboBox,
-                             QDateEdit,
-                             QDateTimeEdit,
-                             QDial,
-                             QDoubleSpinBox,
-                             QFontComboBox,
-                             QLabel,
-                             QLCDNumber,
+from PyQt6.QtWidgets import (QLabel,
                              QLineEdit,
-                             QMainWindow,
-                             QProgressBar,
                              QPushButton,
-                             QRadioButton,
-                             QSlider,
-                             QSpinBox,
-                             QTimeEdit,
-                             QVBoxLayout,
                              QWidget,
                              QTableWidget,
                              QGridLayout,
-                             QMenu,
                              QTableWidgetItem,
                              QHeaderView,
-                             QTextBrowser,
-                             )
+                             QTextBrowser)
 from Analisis_data import Data
 from Abstract_window import AbstractWindow
+
 
 class ThreadData(QtCore.QThread):
     signal = QtCore.pyqtSignal(str)
@@ -58,11 +40,9 @@ class ThreadData(QtCore.QThread):
 
 class MainExperimentDataWindow(AbstractWindow):
     def __init__(self, parent):
-        # TODO : clean code
         super().__init__()
 
         self.setWindowTitle('Основной эксперимент. Получение данных')
-        self.start_time = round(time.time()*1000)
         self.parent = parent
         self.data_thread = ThreadData(self)
         self.resize(1400, 800)
@@ -71,13 +51,14 @@ class MainExperimentDataWindow(AbstractWindow):
         self.parent.dataname = 'data.csv'
         head_1 = 'I_0,mA'
         head_2 = 'U_34,mV'
-        head_3 = 't,s'
+        head_3 = 't,ms'
         with open(os.path.join(self.parent.folder, self.parent.dataname), 'w') as file:
             wr = csv.writer(file)
             wr.writerow([head_1, head_2, head_3])
 
         self.centralwidget = QWidget()
         self.setCentralWidget(self.centralwidget)
+        self.grid_layout = QGridLayout(self.centralwidget)
 
         self.start = QPushButton('Старт')
         self.start.clicked.connect(self.start_clicked)
@@ -92,34 +73,26 @@ class MainExperimentDataWindow(AbstractWindow):
         self.next.setEnabled(False)
         self.next.clicked.connect(self.next_clicked)
 
-        grid_layout = QGridLayout(self.centralwidget)
+        self.lineEdit = QLineEdit(placeholderText='Введите что-то')
+        self.lineEdit.returnPressed.connect(self.enter_smth)
 
-        self.table = QTableWidget(self)  # Create a self.table
-        self.table.setColumnCount(3)  # Set three columns
+        # make table
+        self.table = QTableWidget(self)
+        self.table.setColumnCount(3)
         self.table.setRowCount(0)
-
         self.table.setHorizontalHeaderLabels([head_1, head_2, head_3])
-
         header = self.table.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
         header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
         header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
-        self.table.setItem(0, 0, QTableWidgetItem("Text in column 1"))
-        self.table.setItem(0, 1, QTableWidgetItem("Text in column 2"))
-        self.table.setItem(0, 2, QTableWidgetItem("Text in column 3"))
         self.table.resizeColumnsToContents()
 
-        self.lineEdit = QLineEdit(placeholderText='Введите что-то')
-        self.lineEdit.returnPressed.connect(self.enter_smth)
-
         # Adding the table to the grid
-        grid_layout.addWidget(self.table, 0, 0, -1, 1)
-        grid_layout.addWidget(self.lineEdit, 0, 2, -1, -1)
-        grid_layout.addWidget(self.next, 2, 2, -1, -1)
-        grid_layout.addWidget(self.start, 1, 2)
-        grid_layout.addWidget(self.stop, 1, 3)
-
-        self.parent.draw()
+        self.grid_layout.addWidget(self.table, 0, 0, -1, 1)
+        self.grid_layout.addWidget(self.lineEdit, 0, 2, -1, -1)
+        self.grid_layout.addWidget(self.next, 2, 2, -1, -1)
+        self.grid_layout.addWidget(self.start, 1, 2)
+        self.grid_layout.addWidget(self.stop, 1, 3)
 
     def enter_smth(self):
         # TODO
@@ -134,19 +107,6 @@ class MainExperimentDataWindow(AbstractWindow):
         if not self.data_thread.isRunning():
             self.data_thread.start()
 
-    def no_data(self):
-        current_time = round(time.time()*1000)
-        v = str((current_time-self.start_time)/60)
-        a = v
-        t = str(current_time-self.start_time)
-        with open(os.path.join(self.parent.folder, self.parent.dataname), 'a') as file:
-            wr = csv.writer(file)
-            wr.writerow([v, a, str(current_time-self.start_time)])
-        self.table.insertRow(self.table.rowCount())
-        self.table.setItem(self.table.rowCount()-1, 0, QTableWidgetItem(v))
-        self.table.setItem(self.table.rowCount()-1, 1, QTableWidgetItem(a))
-        self.table.setItem(self.table.rowCount()-1, 2, QTableWidgetItem(t))
-
     def stop_clicked(self):
         self.data_thread.running = False
         self.stop.setEnabled(False)
@@ -155,6 +115,22 @@ class MainExperimentDataWindow(AbstractWindow):
     def next_clicked(self):
         self.parent.number = 21
         self.parent.change_number()
+
+    def no_data(self):
+        current_time = round(time.time()*1000)
+        v = str((current_time-self.start_time)/60)
+        a = v
+        t = str(current_time-self.start_time)
+        self.save_data(v, a, t)
+
+    def save_data(self, v, a, t):
+        with open(os.path.join(self.parent.folder, self.parent.dataname), 'a') as file:
+            wr = csv.writer(file)
+            wr.writerow([v, a, t])
+        self.table.insertRow(self.table.rowCount())
+        self.table.setItem(self.table.rowCount()-1, 0, QTableWidgetItem(v))
+        self.table.setItem(self.table.rowCount()-1, 1, QTableWidgetItem(a))
+        self.table.setItem(self.table.rowCount()-1, 2, QTableWidgetItem(t))
 
     def take_data(self):
         # measure voltage and current
@@ -173,31 +149,34 @@ class MainExperimentDataWindow(AbstractWindow):
         a = f_amp.read(15)
         f_volt.close()
         f_amp.close()
+
         current_time = round(time.time()*1000)
-        with open(os.path.join(self.parent.folder, self.parent.dataname), 'a') as file:
-            wr = csv.writer(file)
-            wr.writerow([v, a, str(current_time-self.start_time)])
+        t = str(current_time-self.start_time)
+        self.save_data(v, a, t)
+
 
 class MainExperimentChartWindow(AbstractWindow):
     def __init__(self, parent):
         super().__init__()
 
+        self.setWindowTitle('Основной эксперимент. Обработка данных')
         self.parent = parent
         self.parent.chartname = 'Chart'
-        self.parent.data = Data(data_filename=os.path.join(self.parent.folder, self.parent.dataname), 
+        self.parent.data = Data(data_filename=os.path.join(self.parent.folder, self.parent.dataname),
                                 saving=os.path.join(self.parent.folder, self.parent.chartname))
         self.parent.data.read_csv()
-        self.parent.data.x=self.parent.data.data['I_0,mA']
-        self.parent.data.y=self.parent.data.data['U_34,mV']
+        self.parent.data.x = self.parent.data.data['I_0,mA']
+        self.parent.data.y = self.parent.data.data['U_34,mV']
         self.parent.data.make_grafic()
-        
+
         self.setWindowTitle('Основной эксперимент. Обработка данных')
         self.resize(1400, 800)
 
         self.centralwidget = QWidget()
         self.setCentralWidget(self.centralwidget)
 
-        pixmap = QPixmap(os.path.join(self.parent.folder, self.parent.chartname))
+        pixmap = QPixmap(os.path.join(
+            self.parent.folder, self.parent.chartname))
         self.label = QLabel(self)
         self.label.setPixmap(pixmap)
         self.label.resize(pixmap.width(), pixmap.height())
@@ -208,4 +187,3 @@ class MainExperimentChartWindow(AbstractWindow):
         self.hbox_layout = QGridLayout(self.centralwidget)
         self.hbox_layout.addWidget(self.label, 0, 0)
         self.hbox_layout.addWidget(self.text, 0, 1)
-

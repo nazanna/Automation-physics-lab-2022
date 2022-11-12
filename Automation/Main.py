@@ -2,38 +2,19 @@ import os
 import sys
 import csv
 import time
-from PyQt6 import QtCore
-from PyQt6.QtGui import QAction,  QIcon, QPixmap
-from PyQt6.QtWidgets import (QHBoxLayout,
-                             QApplication,
-                             QCheckBox,
-                             QComboBox,
-                             QDateEdit,
-                             QDateTimeEdit,
-                             QDial,
-                             QDoubleSpinBox,
-                             QFontComboBox,
-                             QLabel,
-                             QLCDNumber,
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import (QApplication,
                              QLineEdit,
-                             QMainWindow,
-                             QProgressBar,
                              QPushButton,
-                             QRadioButton,
-                             QSlider,
-                             QSpinBox,
-                             QTimeEdit,
-                             QVBoxLayout,
                              QWidget,
                              QTableWidget,
                              QGridLayout,
-                             QMenu,
                              QTableWidgetItem,
                              QHeaderView,
-                             QTextBrowser,
                              )
 from Abstract_window import AbstractWindow
-from Main_experiment_window import *
+from Main_experiment_window import (MainExperimentDataWindow,
+                                    MainExperimentChartWindow)
 
 
 class Start:
@@ -82,7 +63,7 @@ class StartWindow(AbstractWindow):
         self.lineEdit = QLineEdit(placeholderText='Введите фамилию')
         self.lineEdit.returnPressed.connect(self.enter_name)
 
-        self.flow = QPushButton('измерение потока')
+        self.flow = QPushButton('градуировка электромагнита')
         self.flow.clicked.connect(self.flow_click)
         self.flow.setEnabled(False)
         self.main = QPushButton('основной эксперимент')
@@ -118,35 +99,41 @@ class StartWindow(AbstractWindow):
 class FlowWindow(AbstractWindow):
     def __init__(self, parent):
         super().__init__()
+        
+        self.setWindowTitle('Градуировка электромагнита')
         self.parent = parent
-        self.parent = parent
+        
+        # make csv file
+        self.parent.flow_dataname = 'Induction_data.csv'
+        head_1 = 'B,mTl'
+        head_2 = 'U,mV'
+        head_3 = 't,ms'
+        with open(os.path.join(self.parent.folder, self.parent.flow_dataname), 'w') as file:
+            wr = csv.writer(file)
+            wr.writerow([head_1, head_2, head_3])
+            
         self.centralwidget = QWidget()
         self.resize(1400, 800)
         self.setCentralWidget(self.centralwidget)
-        grid_layout = QGridLayout(self.centralwidget)
+        self.grid_layout = QGridLayout(self.centralwidget)
 
         self.start = QPushButton('Старт')
         self.start.clicked.connect(self.start_clicked)
         self.start.setEnabled(True)
+        
+        self.next = QPushButton(self)
+        self.next.setIcon(QIcon('arrow.png'))
+        self.next.setEnabled(False)
+        self.next.clicked.connect(self.next_clicked)
 
         self.lineEdit = QLineEdit(placeholderText='Индукция B, мТл')
         self.lineEdit.returnPressed.connect(self.enter_value)
         self.lineEdit.setReadOnly(True)
 
-        self.parent.flow_dataname = 'Induction_data.csv'
-        head_1 = 'B,mTl'
-        head_2 = 'U,mV'
-        head_3 = 't,s'
-        with open(os.path.join(self.parent.folder, self.parent.flow_dataname), 'w') as file:
-            wr = csv.writer(file)
-            wr.writerow([head_1, head_2, head_3])
-
         self.table = QTableWidget(self)  # Create a self.table
         self.table.setColumnCount(3)  # Set three columns
         self.table.setRowCount(0)
-
         self.table.setHorizontalHeaderLabels([head_1, head_2, head_3])
-
         header = self.table.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
         header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
@@ -156,21 +143,14 @@ class FlowWindow(AbstractWindow):
         self.table.setItem(0, 2, QTableWidgetItem("Text in column 3"))
         self.table.resizeColumnsToContents()
         
-        self.next = QPushButton(self)
-        self.next.setIcon(QIcon('arrow.png'))
-        self.next.setEnabled(False)
-        self.next.clicked.connect(self.next_clicked)
-        
-        grid_layout.addWidget(self.start, 0, 0)
-        grid_layout.addWidget(self.lineEdit, 1, 0)
-        grid_layout.addWidget(self.table, 1, 3)
-        grid_layout.addWidget(self.next, 2, 0)
-        
-
+        self.grid_layout.addWidget(self.start, 0, 0)
+        self.grid_layout.addWidget(self.lineEdit, 1, 0)
+        self.grid_layout.addWidget(self.table, 1, 3)
+        self.grid_layout.addWidget(self.next, 2, 0)
+    
     def next_clicked(self):
         self.parent.number = 20
         self.parent.change_number()
-        
 
     def start_clicked(self):
         self.start.setEnabled(False)
