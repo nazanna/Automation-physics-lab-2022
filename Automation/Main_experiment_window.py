@@ -8,9 +8,10 @@ Created on Fri Nov 11 20:00:45 2022
 import os
 import csv
 import serial
+import numpy as np
 import time
 from PyQt6 import QtCore
-from PyQt6.QtGui import QIcon, QPixmap
+from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import (QLabel,
                              QLineEdit,
                              QPushButton,
@@ -199,7 +200,7 @@ class MainExperimentDataWindow(AbstractWindow):
         # protect of errors:
         if a > 1:
             self.stop_clicked()
-            
+
         f_volt.close()
         f_amp.close()
 
@@ -223,8 +224,11 @@ class MainExperimentChartWindow(AbstractWindow):
         self.parent.data = Data(data_filename=os.path.join(self.parent.folder, self.parent.dataname),
                                 saving=os.path.join(self.parent.folder, self.parent.chartname))
         self.parent.data.read_csv()
-        self.parent.data.x = self.parent.data.data['I_0,mA']
+        # add B(I_M) #TODO
+        self.parent.data.x = np.array(self.parent.data.data['I_0,mA'])*np.array(self.parent.data.data['I_M,mA'])
         self.parent.data.y = self.parent.data.data['U_34,mV']
+        self.parent.data.ylabel = 'U_34,mV'
+        self.parent.data.xlabel = 'I$_{обр} \cdot B$, мА$\cdot $ Tл'
         self.parent.data.make_grafic()
 
         self.setWindowTitle('Основной эксперимент. Обработка данных')
@@ -237,8 +241,8 @@ class MainExperimentChartWindow(AbstractWindow):
             self.parent.folder, self.parent.chartname))
         self.label = QLabel(self)
         self.label.setScaledContents(True)
+        self.label.setFixedSize(0.7*self.width(), 0.9*self.height())
         self.label.setPixmap(pixmap)
-        self.label.setFixedSize(0.7*self.width(), self.height())
 
         self.text = QTextBrowser()
         self.text.setText('text')

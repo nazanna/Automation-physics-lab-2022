@@ -119,7 +119,7 @@ class Data:
                  linestyle='-', color=self.color[1])
 
     def make_grafic(self, named_by_points=True):
-        plt.figure(dpi=500, figsize=(4, 3))
+        plt.figure(dpi=500, figsize=(8, 5))
         self.make_errors()
         if named_by_points:
             self.cap_point = self.caption
