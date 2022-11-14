@@ -1,5 +1,6 @@
 import os
 import sys
+import serial
 import csv
 import time
 from PyQt6.QtGui import QIcon
@@ -103,6 +104,7 @@ class FlowWindow(AbstractWindow):
         self.setWindowTitle('Градуировка электромагнита')
         self.parent = parent
         
+        
         # make csv file
         self.parent.flow_dataname = 'Induction_data.csv'
         head_1 = 'B,mTl'
@@ -165,6 +167,13 @@ class FlowWindow(AbstractWindow):
         self.lineEdit.setReadOnly(False)
 
     def get_data(self):
+        
+        
+       
+        # bytesToRead=ser.inWaiting()
+        # data=ser.read(bytesToRead)
+        # print(data)
+                
         current_time = round(time.time()*1000)
         b = self.lineEdit.text()
         u = str((current_time-self.start_time)/60)
@@ -181,28 +190,30 @@ class FlowWindow(AbstractWindow):
 
 start = Start()
 
-# =============================================================================
 # import time
 # import serial
-#
+
 # ser=serial.Serial(
-#     port='/dev/ttyUSB0',
+#     port='/dev/ttyUSB2',
 #     baudrate=9600,
 #     timeout=1
 # )
 # ser.isOpen()
-#
-# msg='SYSTem:REMote\n'
+# msg='Output on\n'
+
 # ser.write(msg.encode('ascii'))
-#
+
+
+# msg='VOLTage 1\n'
+# ser.write(msg.encode('ascii'))
+
 # while 1:
-#
-#         msg='Read?\n'
+
+#         msg='READ?\n'
 #         ser.write(msg.encode('ascii'))
 #         time.sleep(1)
-#
+
 #         bytesToRead=ser.inWaiting()
 #         data=ser.read(bytesToRead)
 #         print(data)
-#
-# =============================================================================
+

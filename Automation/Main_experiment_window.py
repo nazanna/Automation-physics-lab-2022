@@ -7,6 +7,7 @@ Created on Fri Nov 11 20:00:45 2022
 """
 import os
 import csv
+import serial
 import time
 from PyQt6 import QtCore
 from PyQt6.QtGui import QIcon, QPixmap
@@ -34,8 +35,8 @@ class ThreadData(QtCore.QThread):
     def run(self):
         self.running = True
         while self.running:
-            self.parent.no_data()
-            self.sleep(1)
+            self.parent.take_data()
+            self.sleep(2)
 
 
 class MainExperimentDataWindow(AbstractWindow):
@@ -44,6 +45,16 @@ class MainExperimentDataWindow(AbstractWindow):
 
         self.setWindowTitle('Основной эксперимент. Получение данных')
         self.parent = parent
+
+        self.parent.ser = serial.Serial(
+            port='/dev/ttyUSB2',
+            baudrate=9600,
+            timeout=1
+        )
+        self.parent.ser.isOpen()
+
+        msg = 'OUTput on\n'
+        self.parent.ser.write(msg.encode('ascii'))
         self.data_thread = ThreadData(self)
         self.resize(1400, 800)
 
@@ -127,6 +138,9 @@ class MainExperimentDataWindow(AbstractWindow):
         with open(os.path.join(self.parent.folder, self.parent.dataname), 'a') as file:
             wr = csv.writer(file)
             wr.writerow([v, a, t])
+        v = str(v)
+        a = str(a)
+        t = str(t)
         self.table.insertRow(self.table.rowCount())
         self.table.setItem(self.table.rowCount()-1, 0, QTableWidgetItem(v))
         self.table.setItem(self.table.rowCount()-1, 1, QTableWidgetItem(a))
@@ -134,25 +148,43 @@ class MainExperimentDataWindow(AbstractWindow):
 
     def take_data(self):
         # measure voltage and current
-        volt_name = os.path.join('/dev', 'usbtmc1')
+        volt = 1.5 * (1+(time.time()-self.start_time/1000)/20)
+
+        # print(volt)
+        msg = 'VOLTage '+str(volt)+'\n'
+        self.parent.ser.write(msg.encode('ascii'))
+        time.sleep(1)
+
+        msg = 'MEASure:VOLTage?\n'
+
+        self.parent.ser.write(msg.encode('ascii'))
+        time.sleep(1)
+        bytesToRead = self.parent.ser.inWaiting()
+        data = self.parent.ser.read(bytesToRead)
+        print(float(data))
+
+        volt_name = os.path.join('/dev', 'usbtmc0')
         f_volt = open(volt_name, 'w')
         f_volt.write('Measure:Voltage:DC?\n')
         f_volt.close()
-        amp_name = os.path.join('/dev', 'usbtmc2')
+        amp_name = os.path.join('/dev', 'usbtmc1')
         f_amp = open(amp_name, 'w')
         f_amp.write('Measure:Current:DC?\n')
         f_amp.close()
 
         f_volt = open(volt_name, 'r')
-        v = f_volt.read(15)
+        v = '{:.9f}'.format(float(f_volt.read(15))*10**3)
         f_amp = open(amp_name, 'r')
-        a = f_amp.read(15)
+        a = '{:.9f}'.format(float(f_amp.read(15))*10**3)
         f_volt.close()
         f_amp.close()
 
         current_time = round(time.time()*1000)
         t = str(current_time-self.start_time)
         self.save_data(v, a, t)
+
+    def closeEvent(self, event):
+        self.data_thread.running = False
 
 
 class MainExperimentChartWindow(AbstractWindow):
@@ -178,12 +210,13 @@ class MainExperimentChartWindow(AbstractWindow):
         pixmap = QPixmap(os.path.join(
             self.parent.folder, self.parent.chartname))
         self.label = QLabel(self)
+        pixmap.scaled(0.5, 0.3)
         self.label.setPixmap(pixmap)
-        self.label.resize(pixmap.width(), pixmap.height())
 
         self.text = QTextBrowser()
         self.text.setText('text')
 
+        self.resize(1400, 800)
         self.hbox_layout = QGridLayout(self.centralwidget)
         self.hbox_layout.addWidget(self.label, 0, 0)
         self.hbox_layout.addWidget(self.text, 0, 1)
