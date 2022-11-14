@@ -14,8 +14,8 @@ from PyQt6.QtWidgets import (QApplication,
                              QLabel
                              )
 from Abstract_window import AbstractWindow
-from Main_experiment_window import (MainExperimentDataWindow,
-                                    MainExperimentChartWindow)
+from Main_experiment_window import MainWindow
+from ChartWindow import ChartWindow
 from GraduationWindow import GraduationWindow
 from SignWindow import SignWindow
 from ResistanceWindow import ResistanceWindow
@@ -31,9 +31,7 @@ class Start:
             self.app = QApplication.instance()
         self.window = StartWindow(self)
         
-        # self.add_ser()
-        # self.parent.amp_name= os.path.join('/dev', 'usbtmc1')
-        # self.volt_name = os.path.join('/dev', 'usbtmc0')
+        # self.add_equip()
         
         self.draw()
         self.app.exec()
@@ -50,19 +48,19 @@ class Start:
             self.window = GraduationWindow(self)
         if self.number == 20:
             self.window.close()
-            self.window = MainExperimentDataWindow(self)
-        if self.number == 21:
-            self.window.close()
-            self.window = MainExperimentChartWindow(self)
+            self.window = MainWindow(self)
         if self.number == 30:
             self.window.close()
             self.window = SignWindow(self)
         if self.number == 40:
             self.window.close()
             self.window = ResistanceWindow(self)
+        if self.number == 50:
+            self.window.close()
+            self.window = ChartWindow(self)
         self.draw()
         
-    def add_ser(self):
+    def add_equip(self):
         self.ser = serial.Serial(
             port='/dev/ttyUSB2',
             baudrate=9600,
@@ -71,6 +69,9 @@ class Start:
         self.ser.isOpen()
         msg = 'OUTput on\n'
         self.ser.write(msg.encode('ascii'))
+        
+        self.parent.amp_name= os.path.join('/dev', 'usbtmc1')
+        self.volt_name = os.path.join('/dev', 'usbtmc0')
 
 
 class StartWindow(AbstractWindow):
@@ -102,6 +103,11 @@ class StartWindow(AbstractWindow):
         self.res.clicked.connect(self.res_click)
         if not self.parent.foldername:
             self.res.setEnabled(False)
+            
+        self.chart = QPushButton('Обработка данных')
+        self.chart.clicked.connect(self.chart_click)
+        if not self.parent.foldername:
+            self.chart.setEnabled(False)
                        
         self.main = QPushButton('Основной эксперимент')
         self.main.clicked.connect(self.main_click)
@@ -117,9 +123,14 @@ class StartWindow(AbstractWindow):
         self.hbox_layout.addWidget(self.sign, 3, 0)
         self.hbox_layout.addWidget(self.res, 3, 1)
         self.hbox_layout.addWidget(self.main, 2, 1)
+        self.hbox_layout.addWidget(self.chart, 4, 0, 1, -1)
 
     def flow_click(self):
         self.parent.number = 10
+        self.parent.change_number()
+        
+    def chart_click(self):
+        self.parent.number = 50
         self.parent.change_number()
 
     def main_click(self):
@@ -145,6 +156,7 @@ class StartWindow(AbstractWindow):
         self.main.setEnabled(True)
         self.sign.setEnabled(True)
         self.res.setEnabled(True)
+        self.chart.setEnabled(True)
         self.lineEdit.setReadOnly(True)
 
 

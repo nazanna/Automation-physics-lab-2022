@@ -40,7 +40,7 @@ class ThreadData(QtCore.QThread):
             self.sleep(1)
 
 
-class MainExperimentDataWindow(AbstractWindow):
+class MainWindow(AbstractWindow):
     def __init__(self, parent):
         super().__init__()
 
@@ -75,9 +75,9 @@ class MainExperimentDataWindow(AbstractWindow):
         self.new.clicked.connect(self.new_clicked)
         self.new.setEnabled(False)
 
-        self.chart = QPushButton('График')
-        self.chart.setEnabled(False)
-        self.chart.clicked.connect(self.chart_clicked)
+        self.menu = QPushButton('Меню')
+        self.menu.setEnabled(False)
+        self.menu.clicked.connect(self.menu_clicked)
 
         self.lineEdit = QLineEdit(placeholderText='Введите a, мм')
         self.lineEdit.returnPressed.connect(self.enter_a)
@@ -98,7 +98,7 @@ class MainExperimentDataWindow(AbstractWindow):
         self.grid_layout.addWidget(self.start, 1, 2)
         self.grid_layout.addWidget(self.stop, 1, 3)
         self.grid_layout.addWidget(self.new, 2, 2, 1, -1)
-        self.grid_layout.addWidget(self.chart, 3, 2, 1, -1)
+        self.grid_layout.addWidget(self.menu, 3, 2, 1, -1)
 
     def enter_a(self):
         # TODO
@@ -119,7 +119,7 @@ class MainExperimentDataWindow(AbstractWindow):
         self.data_thread.running = False
         self.stop.setEnabled(False)
         self.start.setEnabled(True)
-        self.chart.setEnabled(True)
+        self.menu.setEnabled(True)
 
     def new_clicked(self):
         self.number_iteration += 1
@@ -130,8 +130,8 @@ class MainExperimentDataWindow(AbstractWindow):
         self.new.setEnabled(True)
         self.stop.setEnabled(True)
 
-    def chart_clicked(self):
-        self.parent.number = 21
+    def menu_clicked(self):
+        self.parent.number = 0
         self.parent.change_number()
 
     def no_data(self):
@@ -199,41 +199,8 @@ class MainExperimentDataWindow(AbstractWindow):
 
     def closeEvent(self, event):
         self.data_thread.running = False
+        # msg = 'VOLTage '+str(0)+'\n'
+        # self.parent.ser.write(msg.encode('ascii'))
 
 
-class MainExperimentChartWindow(AbstractWindow):
-    def __init__(self, parent):
-        super().__init__()
 
-        self.setWindowTitle('Основной эксперимент. Обработка данных')
-        self.parent = parent
-        self.parent.chartname = 'Chart'
-        self.parent.data = Data(data_filename=os.path.join(self.parent.folder, self.parent.dataname),
-                                saving=os.path.join(self.parent.folder, self.parent.chartname))
-        self.parent.data.read_csv()
-        # add B(I_M) #TODO
-        self.parent.data.x = np.array(self.parent.data.data['I_0,mA'])*np.array(self.parent.data.data['I_M,mA'])
-        self.parent.data.y = self.parent.data.data['U_34,mV']
-        self.parent.data.ylabel = 'U_34,mV'
-        self.parent.data.xlabel = 'I$_{обр} \cdot B$, мА$\cdot $ Tл'
-        self.parent.data.make_grafic()
-
-        self.setWindowTitle('Основной эксперимент. Обработка данных')
-        self.resize(1400, 800)
-
-        self.centralwidget = QWidget()
-        self.setCentralWidget(self.centralwidget)
-
-        pixmap = QPixmap(os.path.join(
-            self.parent.folder, self.parent.chartname))
-        self.label = QLabel(self)
-        self.label.setScaledContents(True)
-        self.label.setFixedSize(0.7*self.width(), 0.9*self.height())
-        self.label.setPixmap(pixmap)
-
-        self.text = QTextBrowser()
-        self.text.setText('text')
-
-        self.hbox_layout = QGridLayout(self.centralwidget)
-        self.hbox_layout.addWidget(self.label, 0, 0)
-        self.hbox_layout.addWidget(self.text, 0, 1)

@@ -76,3 +76,8 @@ class SignWindow(AbstractWindow):
         without_field = self.measure(0)
         with_field = self.measure(10)
         return without_field, with_field
+        
+    def closeEvent(self, event):
+        pass
+        # msg = 'VOLTage '+str(0)+'\n'
+        # self.parent.ser.write(msg.encode('ascii'))

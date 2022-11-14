@@ -113,3 +113,8 @@ class GraduationWindow(AbstractWindow):
         I_M = self.parent.ser.read(bytesToRead)
         self.volt += 5
         self.save_data([b, self.volt, I_M, t])
+        
+    def closeEvent(self, event):
+        pass
+        # msg = 'VOLTage '+str(0)+'\n'
+        # self.parent.ser.write(msg.encode('ascii'))
