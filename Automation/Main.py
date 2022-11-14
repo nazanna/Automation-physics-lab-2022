@@ -8,25 +8,27 @@ from PyQt6.QtWidgets import (QApplication,
                              QLineEdit,
                              QPushButton,
                              QWidget,
-                             QTableWidget,
                              QGridLayout,
                              QTableWidgetItem,
                              QHeaderView,
+                             QLabel
                              )
 from Abstract_window import AbstractWindow
 from Main_experiment_window import (MainExperimentDataWindow,
                                     MainExperimentChartWindow)
+from GraduationWindow import GraduationWindow
 
 
 class Start:
     def __init__(self):
         self.number = 0
-        self.foldername = ''
+        self.foldername = None
         if not QApplication.instance():
             self.app = QApplication(sys.argv)
         else:
             self.app = QApplication.instance()
         self.window = StartWindow(self)
+        # self.add_ser()
         self.draw()
         self.app.exec()
 
@@ -34,19 +36,32 @@ class Start:
         self.window.show()
 
     def change_number(self):
+        if self.number == 0:
+            self.window.close()
+            self.window = StartWindow(self)
+        if self.number == 10:
+            self.window.close()
+            self.window = GraduationWindow(self)
         if self.number == 20:
             self.window.close()
             self.window = MainExperimentDataWindow(self)
         if self.number == 21:
             self.window.close()
             self.window = MainExperimentChartWindow(self)
-        if self.number == 10:
+        if self.number == 30:
             self.window.close()
-            self.window = FlowWindow(self)
-        if self.number == 0:
-            self.window.close()
-            self.window = StartWindow(self)
+            self.window = SignWindow(self)
         self.draw()
+        
+    def add_ser(self):
+        self.ser = serial.Serial(
+            port='/dev/ttyUSB2',
+            baudrate=9600,
+            timeout=1
+        )
+        self.ser.isOpen()
+        msg = 'OUTput on\n'
+        self.ser.write(msg.encode('ascii'))
 
 
 class StartWindow(AbstractWindow):
@@ -58,20 +73,34 @@ class StartWindow(AbstractWindow):
         self.centralwidget = QWidget()
         self.resize(1400, 800)
         self.setCentralWidget(self.centralwidget)
-        self.lineEdit = QLineEdit(placeholderText='Введите фамилию')
+        if not self.parent.foldername:
+            self.lineEdit = QLineEdit(placeholderText='Введите фамилию')
+        else:
+            self.lineEdit = QLineEdit(placeholderText=self.parent.foldername)
         self.lineEdit.returnPressed.connect(self.enter_name)
 
-        self.flow = QPushButton('градуировка электромагнита')
+        self.flow = QPushButton('Градуировка электромагнита')
         self.flow.clicked.connect(self.flow_click)
-        self.flow.setEnabled(False)
-        self.main = QPushButton('основной эксперимент')
+        if not self.parent.foldername:
+            self.flow.setEnabled(False)
+            
+        self.sign = QPushButton('Знак носителей')
+        self.sign.clicked.connect(self.sign_click)
+        if not self.parent.foldername:
+            self.sign.setEnabled(False)
+                       
+        self.main = QPushButton('Основной эксперимент')
         self.main.clicked.connect(self.main_click)
-        self.main.setEnabled(False)
-
+        if not self.parent.foldername:
+            self.main.setEnabled(False)
+        if self.parent.foldername:
+            self.lineEdit.setReadOnly(True)
+            
         self.hbox_layout = QGridLayout(self.centralwidget)
         self.hbox_layout.setRowStretch(1, 1)
         self.hbox_layout.addWidget(self.lineEdit, 1, 0, 1, 2)
         self.hbox_layout.addWidget(self.flow, 2, 0)
+        self.hbox_layout.addWidget(self.sign, 3, 0)
         self.hbox_layout.addWidget(self.main, 2, 1)
 
     def flow_click(self):
@@ -80,6 +109,10 @@ class StartWindow(AbstractWindow):
 
     def main_click(self):
         self.parent.number = 20
+        self.parent.change_number()
+        
+    def sign_click(self):
+        self.parent.number = 30
         self.parent.change_number()
 
     def enter_name(self):
@@ -91,97 +124,71 @@ class StartWindow(AbstractWindow):
 
         self.flow.setEnabled(True)
         self.main.setEnabled(True)
+        self.sign.setEnabled(True)
         self.lineEdit.setReadOnly(True)
 
-
-class FlowWindow(AbstractWindow):
+class SignWindow(AbstractWindow):
     def __init__(self, parent):
         super().__init__()
-        
-        self.setWindowTitle('Градуировка электромагнита')
+
+        self.setWindowTitle('Определение знака носителей')
         self.parent = parent
         
+        self.start = QPushButton('Старт')
+        self.start.clicked.connect(self.start_clicked)
+        self.start.setEnabled(True)
+
+        self.menu = QPushButton('Меню')
+        self.menu.setEnabled(False)
+        self.menu.clicked.connect(self.menu_clicked)
         
-        # make csv file
-        self.parent.flow_dataname = 'Induction_data.csv'
-        head_1 = 'B,mTl'
-        head_2 = 'U,mV'
-        head_3 = 't,ms'
-        with open(os.path.join(self.parent.folder, self.parent.flow_dataname), 'w') as file:
-            wr = csv.writer(file)
-            wr.writerow([head_1, head_2, head_3])
-            
+        self.with_field = QLabel('С полем: ', self)
+        self.without_field = QLabel('С полем: ', self)
+        self.with_field_value = QLabel(self)
+        self.without_field_value = QLabel(self)
+                
         self.centralwidget = QWidget()
         self.resize(1400, 800)
         self.setCentralWidget(self.centralwidget)
         self.grid_layout = QGridLayout(self.centralwidget)
-
-        self.start = QPushButton('Старт')
-        self.start.clicked.connect(self.start_clicked)
-        self.start.setEnabled(True)
         
-        self.next = QPushButton(self)
-        self.next.setIcon(QIcon('arrow.png'))
-        self.next.setEnabled(False)
-        self.next.clicked.connect(self.next_clicked)
-
-        self.lineEdit = QLineEdit(placeholderText='Индукция B, мТл')
-        self.lineEdit.returnPressed.connect(self.enter_value)
-        self.lineEdit.setReadOnly(True)
-
-        self.table = QTableWidget(self)  # Create a self.table
-        self.table.setColumnCount(3)  # Set three columns
-        self.table.setRowCount(0)
-        self.table.setHorizontalHeaderLabels([head_1, head_2, head_3])
-        header = self.table.horizontalHeader()
-        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
-        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
-        self.table.setItem(0, 0, QTableWidgetItem("Text in column 1"))
-        self.table.setItem(0, 1, QTableWidgetItem("Text in column 2"))
-        self.table.setItem(0, 2, QTableWidgetItem("Text in column 3"))
-        self.table.resizeColumnsToContents()
+        self.grid_layout.addWidget(self.start, 0, 0, 1, -1)
+        self.grid_layout.addWidget(self.with_field, 1, 0)
+        self.grid_layout.addWidget(self.with_field_value, 1, 1)
+        self.grid_layout.addWidget(self.without_field, 2, 0)
+        self.grid_layout.addWidget(self.without_field_value, 2, 1)
+        self.grid_layout.addWidget(self.menu, 3, 0, 1, -1)
         
-        self.grid_layout.addWidget(self.start, 0, 0)
-        self.grid_layout.addWidget(self.lineEdit, 1, 0)
-        self.grid_layout.addWidget(self.table, 1, 3)
-        self.grid_layout.addWidget(self.next, 2, 0)
-    
-    def next_clicked(self):
-        self.parent.number = 20
+    def menu_clicked(self):
+        self.parent.number = 0
         self.parent.change_number()
 
     def start_clicked(self):
         self.start.setEnabled(False)
-        self.start_time = round(time.time()*1000)
-        self.lineEdit.setReadOnly(False)
-        self.next.setEnabled(True)
-
-    def enter_value(self):
-        self.lineEdit.setReadOnly(True)
-        self.get_data()
-        self.lineEdit.clear()
-        self.lineEdit.setReadOnly(False)
-
-    def get_data(self):
+        with_field=10
+        without_field=15
+        # without_field, with_field = self.get_values()
+        self.with_field_value.setText(str(with_field)+', mV')
+        self.without_field_value.setText(str(without_field)+', mV')
+        self.menu.setEnabled(True)
         
-        
-       
-        # bytesToRead=ser.inWaiting()
-        # data=ser.read(bytesToRead)
-        # print(data)
-                
-        current_time = round(time.time()*1000)
-        b = self.lineEdit.text()
-        u = str((current_time-self.start_time)/60)
-        t = str(current_time-self.start_time)
-        with open(os.path.join(self.parent.folder, self.parent.flow_dataname), 'a') as file:
-            wr = csv.writer(file)
-            wr.writerow([b, u, str(t)])
-        self.table.insertRow(self.table.rowCount())
-        self.table.setItem(self.table.rowCount()-1, 0, QTableWidgetItem(b))
-        self.table.setItem(self.table.rowCount()-1, 1, QTableWidgetItem(u))
-        self.table.setItem(self.table.rowCount()-1, 2, QTableWidgetItem(t))
+    def measure(self, volt):
+        msg = 'VOLTage '+str(volt)+'\n'
+        self.parent.ser.write(msg.encode('ascii'))
+        time.sleep(1)
+        volt_name = os.path.join('/dev', 'usbtmc0')
+        f_volt = open(volt_name, 'w')
+        f_volt.write('Measure:Voltage:DC?\n')
+        f_volt.close()
+        f_volt = open(volt_name, 'r')
+        v = '{:.9f}'.format(float(f_volt.read(15))*10**3)
+        f_volt.close()
+        return v
+    
+    def get_values(self):
+        without_field = self.measure(0)
+        with_field = self.measure(10)
+        return without_field, with_field
 
 
 
@@ -213,4 +220,3 @@ start = Start()
 #         bytesToRead=ser.inWaiting()
 #         data=ser.read(bytesToRead)
 #         print(data)
-

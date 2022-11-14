@@ -46,7 +46,6 @@ class MainExperimentDataWindow(AbstractWindow):
 
         self.setWindowTitle('Основной эксперимент. Получение данных')
         self.parent = parent
-        # self.add_ser()
         self.data_thread = ThreadData(self)
         self.resize(1400, 800)
         self.number_iteration = 1
@@ -100,16 +99,6 @@ class MainExperimentDataWindow(AbstractWindow):
         self.grid_layout.addWidget(self.stop, 1, 3)
         self.grid_layout.addWidget(self.new, 2, 2, 1, -1)
         self.grid_layout.addWidget(self.chart, 3, 2, 1, -1)
-
-    def add_ser(self):
-        self.parent.ser = serial.Serial(
-            port='/dev/ttyUSB2',
-            baudrate=9600,
-            timeout=1
-        )
-        self.parent.ser.isOpen()
-        msg = 'OUTput on\n'
-        self.parent.ser.write(msg.encode('ascii'))
 
     def enter_a(self):
         # TODO
