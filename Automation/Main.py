@@ -17,6 +17,8 @@ from Abstract_window import AbstractWindow
 from Main_experiment_window import (MainExperimentDataWindow,
                                     MainExperimentChartWindow)
 from GraduationWindow import GraduationWindow
+from SignWindow import SignWindow
+from ResistanceWindow import ResistanceWindow
 
 
 class Start:
@@ -28,7 +30,11 @@ class Start:
         else:
             self.app = QApplication.instance()
         self.window = StartWindow(self)
+        
         # self.add_ser()
+        # self.parent.amp_name= os.path.join('/dev', 'usbtmc1')
+        # self.volt_name = os.path.join('/dev', 'usbtmc0')
+        
         self.draw()
         self.app.exec()
 
@@ -51,6 +57,9 @@ class Start:
         if self.number == 30:
             self.window.close()
             self.window = SignWindow(self)
+        if self.number == 40:
+            self.window.close()
+            self.window = ResistanceWindow(self)
         self.draw()
         
     def add_ser(self):
@@ -88,6 +97,11 @@ class StartWindow(AbstractWindow):
         self.sign.clicked.connect(self.sign_click)
         if not self.parent.foldername:
             self.sign.setEnabled(False)
+            
+        self.res = QPushButton('Удельная проводимость')
+        self.res.clicked.connect(self.res_click)
+        if not self.parent.foldername:
+            self.res.setEnabled(False)
                        
         self.main = QPushButton('Основной эксперимент')
         self.main.clicked.connect(self.main_click)
@@ -101,6 +115,7 @@ class StartWindow(AbstractWindow):
         self.hbox_layout.addWidget(self.lineEdit, 1, 0, 1, 2)
         self.hbox_layout.addWidget(self.flow, 2, 0)
         self.hbox_layout.addWidget(self.sign, 3, 0)
+        self.hbox_layout.addWidget(self.res, 3, 1)
         self.hbox_layout.addWidget(self.main, 2, 1)
 
     def flow_click(self):
@@ -109,6 +124,10 @@ class StartWindow(AbstractWindow):
 
     def main_click(self):
         self.parent.number = 20
+        self.parent.change_number()
+        
+    def res_click(self):
+        self.parent.number = 40
         self.parent.change_number()
         
     def sign_click(self):
@@ -125,71 +144,11 @@ class StartWindow(AbstractWindow):
         self.flow.setEnabled(True)
         self.main.setEnabled(True)
         self.sign.setEnabled(True)
+        self.res.setEnabled(True)
         self.lineEdit.setReadOnly(True)
 
-class SignWindow(AbstractWindow):
-    def __init__(self, parent):
-        super().__init__()
 
-        self.setWindowTitle('Определение знака носителей')
-        self.parent = parent
-        
-        self.start = QPushButton('Старт')
-        self.start.clicked.connect(self.start_clicked)
-        self.start.setEnabled(True)
-
-        self.menu = QPushButton('Меню')
-        self.menu.setEnabled(False)
-        self.menu.clicked.connect(self.menu_clicked)
-        
-        self.with_field = QLabel('С полем: ', self)
-        self.without_field = QLabel('С полем: ', self)
-        self.with_field_value = QLabel(self)
-        self.without_field_value = QLabel(self)
-                
-        self.centralwidget = QWidget()
-        self.resize(1400, 800)
-        self.setCentralWidget(self.centralwidget)
-        self.grid_layout = QGridLayout(self.centralwidget)
-        
-        self.grid_layout.addWidget(self.start, 0, 0, 1, -1)
-        self.grid_layout.addWidget(self.with_field, 1, 0)
-        self.grid_layout.addWidget(self.with_field_value, 1, 1)
-        self.grid_layout.addWidget(self.without_field, 2, 0)
-        self.grid_layout.addWidget(self.without_field_value, 2, 1)
-        self.grid_layout.addWidget(self.menu, 3, 0, 1, -1)
-        
-    def menu_clicked(self):
-        self.parent.number = 0
-        self.parent.change_number()
-
-    def start_clicked(self):
-        self.start.setEnabled(False)
-        with_field=10
-        without_field=15
-        # without_field, with_field = self.get_values()
-        self.with_field_value.setText(str(with_field)+', mV')
-        self.without_field_value.setText(str(without_field)+', mV')
-        self.menu.setEnabled(True)
-        
-    def measure(self, volt):
-        msg = 'VOLTage '+str(volt)+'\n'
-        self.parent.ser.write(msg.encode('ascii'))
-        time.sleep(1)
-        volt_name = os.path.join('/dev', 'usbtmc0')
-        f_volt = open(volt_name, 'w')
-        f_volt.write('Measure:Voltage:DC?\n')
-        f_volt.close()
-        f_volt = open(volt_name, 'r')
-        v = '{:.9f}'.format(float(f_volt.read(15))*10**3)
-        f_volt.close()
-        return v
     
-    def get_values(self):
-        without_field = self.measure(0)
-        with_field = self.measure(10)
-        return without_field, with_field
-
 
 
 start = Start()

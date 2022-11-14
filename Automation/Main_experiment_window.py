@@ -170,20 +170,18 @@ class MainExperimentDataWindow(AbstractWindow):
         I_M = self.parent.ser.read(bytesToRead)
         self.volt += 5
 
-        volt_name = os.path.join('/dev', 'usbtmc0')
-        f_volt = open(volt_name, 'w')
+        f_volt = open(self.parent.volt_name, 'w')
         f_volt.write('Measure:Voltage:DC?\n')
         f_volt.close()
-        amp_name = os.path.join('/dev', 'usbtmc1')
-        f_amp = open(amp_name, 'w')
+        f_amp = open(self.parent.amp_name, 'w')
         f_amp.write('Measure:Current:DC?\n')
         f_amp.close()
 
-        f_volt = open(volt_name, 'r')
+        f_volt = open(self.parent.volt_name, 'r')
         v = '{:.9f}'.format(float(f_volt.read(15))*10**3)
         if self.volt == 0:
             self.u_0 = v
-        f_amp = open(amp_name, 'r')
+        f_amp = open(self.parent.amp_name, 'r')
         a = '{:.9f}'.format(float(f_amp.read(15))*10**3)
         print(a)
         # protect of errors:
