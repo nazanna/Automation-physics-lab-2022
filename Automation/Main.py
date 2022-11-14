@@ -30,9 +30,6 @@ class Start:
         self.draw()
         self.app.exec()
 
-    def __del__(self):
-        print('destruct')
-
     def draw(self):
         self.window.show()
 
