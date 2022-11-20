@@ -31,7 +31,7 @@ class SignWindow(AbstractWindow):
         self.menu.clicked.connect(self.menu_clicked)
         
         self.with_field = QLabel('С полем: ', self)
-        self.without_field = QLabel('С полем: ', self)
+        self.without_field = QLabel('Без поля: ', self)
         self.with_field_value = QLabel(self)
         self.without_field_value = QLabel(self)
                 

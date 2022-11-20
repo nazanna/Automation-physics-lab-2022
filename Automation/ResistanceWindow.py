@@ -60,11 +60,11 @@ class ResistanceWindow(AbstractWindow):
         self.parent.change_number()
     
     def enter_L(self):
-        self.parent.L=self.line_L.text()
+        self.parent.L=float(self.line_L.text())/1000
         self.line_L.setReadOnly(True)
         
     def enter_l(self):
-        self.parent.L=self.line_l.text()
+        self.parent.l=float(self.line_l.text())/1000
         self.start.setEnabled(True)
         self.line_l.setReadOnly(True)
     
@@ -73,6 +73,9 @@ class ResistanceWindow(AbstractWindow):
         current=10
         voltage=15
         # voltage, current = self.measure()
+        
+        self.parent.sigma = current*self.parent.L/(voltage*self.parent.l*self.parent.a)
+        self.parent.sigma_sigma = self.parent.sigma*((5*10**-5)**2+(0.0035/100)**2)**0.5
         self.current_value.setText(str(current)+', mA')
         self.voltage_value.setText(str(voltage)+', mV')
         self.menu.setEnabled(True)

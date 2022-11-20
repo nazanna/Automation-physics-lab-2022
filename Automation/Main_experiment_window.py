@@ -26,7 +26,6 @@ from Abstract_window import AbstractWindow
 
 
 class ThreadData(QtCore.QThread):
-    signal = QtCore.pyqtSignal(str)
 
     def __init__(self, parent):
         QtCore.QThread.__init__(self)
@@ -102,7 +101,7 @@ class MainWindow(AbstractWindow):
 
     def enter_a(self):
         # TODO
-        self.parent.a = self.lineEdit.text()
+        self.parent.a = float(self.lineEdit.text())/10**3
         self.start.setEnabled(True)
         self.lineEdit.setReadOnly(True)
 

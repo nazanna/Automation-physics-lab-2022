@@ -12,8 +12,8 @@ from scipy.optimize import curve_fit
 
 
 class Data:
-    def __init__(self, x=[], y=[], xlabel='', ylabel='', caption='', xerr=None,
-                 yerr=None, through_0=0, data_filename='', color=None,
+    def __init__(self, x=[], y=[], xlabel='', ylabel='', caption='', xerr=[],
+                 yerr=[], through_0=0, data_filename='', color=None,
                  centering=None, size=15, coefficient=[0.9, 1.1], saving=None):
         self.x = x
         self.y = y
@@ -36,20 +36,20 @@ class Data:
         self.data_filename = data_filename
         self.saving = saving
 
-    def make_errors(self, xerr=None, yerr=None):
-        if not xerr:
+    def make_errors(self, xerr=[], yerr=[]):
+        if not len(xerr):
             xerr = self.xerr
-        if not yerr:
+        if not len(yerr):
             yerr = self.yerr
-        if not xerr:
+        if not len(xerr):
             xerr = 0
-        if not yerr:
+        if not len(yerr):
             yerr = 0
-        if not yerr or type(yerr) == float or type(yerr) == int:
+        if type(yerr) == float or type(yerr) == int:
             self.yerr = [yerr for _ in self.y]
         else:
             self.yerr = yerr
-        if not xerr or type(xerr) == float or type(xerr) == int:
+        if type(xerr) == float or type(xerr) == int:
             self.xerr = [xerr for _ in self.x]
         else:
             self.xerr = xerr
