@@ -3,7 +3,8 @@ import sys
 import serial
 import csv
 import time
-from PyQt6.QtGui import QIcon
+# from PyQt import KeepAspectRatioByExpanding
+from PyQt6.QtGui import QIcon, QPalette, QImage, QBrush
 from PyQt6.QtWidgets import (QApplication,
                              QLineEdit,
                              QPushButton,
@@ -31,7 +32,7 @@ class Start:
             self.app = QApplication.instance()
         self.window = StartWindow(self)
         
-        # self.add_equip()
+        self.add_equip()
         
         self.draw()
         self.app.exec()
@@ -62,7 +63,7 @@ class Start:
         
     def add_equip(self):
         self.ser = serial.Serial(
-            port='/dev/ttyUSB2',
+            port='/dev/ttyUSB0',
             baudrate=9600,
             timeout=1
         )
@@ -70,8 +71,38 @@ class Start:
         msg = 'OUTput on\n'
         self.ser.write(msg.encode('ascii'))
         
-        self.parent.amp_name= os.path.join('/dev', 'usbtmc1')
-        self.volt_name = os.path.join('/dev', 'usbtmc0')
+        for i in range(3):
+            l = 'usbtmc'+str(i)
+            file = os.path.join('/dev', l)
+            f = open(file, 'w')
+            f.write('*IDN?\n')
+            f.close()
+            f = open(file, 'r')
+            st = f.read(35)
+            # print(st)
+            f.close()
+            if st=='AKIP,AKIP-2101/2,NDM36GBD4R0065,3.0':
+                self.I_M_name =  os.path.join('/dev', l)
+            
+            if st=='AKIP,AKIP-2101/2,NDM36GBD4R0064,3.0':
+                self.amp_name =  os.path.join('/dev', l)
+            
+            if st=='Prist,V7-78/1,TW00023291,03.31-01-0':
+                self.volt_name =  os.path.join('/dev', l)
+    
+    
+    def close(self):
+        
+        msg = 'VOLTage '+str(0)+'\n'
+        self.ser.write(msg.encode('ascii'))
+        
+    def __del__(self):
+        
+        msg = 'OUTput off\n'
+        self.ser.write(msg.encode('ascii'))
+                    
+            
+        
 
 
 class StartWindow(AbstractWindow):
@@ -79,6 +110,14 @@ class StartWindow(AbstractWindow):
         super().__init__()
 
         self.setWindowTitle('Эффект Холла в полупроводниках')
+        
+        # palette = QPalette()
+        # img = QImage('image.jpg')
+        # scaled = img.scaled(self.size(), KeepAspectRatioByExpanding)
+        # palette.setBrush(QPalette.Window, QBrush(scaled))
+        # self.setPalette(palette)
+        
+        # self.setStyleSheet('.QWidget {background-image: url(style.jpg);}') 
         self.parent = parent
         self.centralwidget = QWidget()
         self.resize(1400, 800)
@@ -158,6 +197,7 @@ class StartWindow(AbstractWindow):
         self.res.setEnabled(True)
         self.chart.setEnabled(True)
         self.lineEdit.setReadOnly(True)
+        
 
 
     

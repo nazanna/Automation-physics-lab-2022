@@ -126,10 +126,10 @@ class ChartWindow(AbstractWindow):
                                              (sigma[0]/k)**2)**0.5
 
     def make_text(self):
-        s0 = 'Вычисленные постоянные равны:'+'\n'+\
-            'R_X - постоянная Холла, '+'\n'+' n - концентрация носителей заряда,'+'\n'+\
+        s0 = 'Вычисленные постоянные равны:'+'\n' +\
+            'R_X - постоянная Холла, '+'\n'+' n - концентрация носителей заряда,'+'\n' +\
              'sigma - удельная проводимость, '+'\n'+' b - подвижность'+'\n'+'\n'
-        
+
         s1 = 'R_X = ' + str(round(self.parent.R_H*10**10)) + '  +-  ' + \
             str(round(self.parent.sigma_R_H*10**10)) + \
             ' , 10^-10 м^3/Кл'+'\n'+'\n'
@@ -141,29 +141,3 @@ class ChartWindow(AbstractWindow):
         s4 = 'b = ' + str(round(self.parent.b*10**4)) + '  +-  ' + \
             str(round(self.parent.sigma_b*10**4)) + ', см^3/(В*с)'+'\n'+'\n'
         return s0+s1+s2+s3+s4
-
-        # print('all ', -k/h, '+-', sigma[0]/h)
-        # plt.show()
-        # plt.figure(dpi=500, figsize=(8, 5))
-
-        # plt.figure(dpi=500, figsize=(8, 5))
-        # x = np.array(data['I'])
-        # y = np.array(data['k'])
-        # xlabel = 'I, мА'
-        # ylabel = 'K, мВ/Тл'
-        # caption_point = ''
-        # xerr = abs(x*1/100)
-        # yerr = data['sig_k']
-        # k, b, sigma = make_graffic(
-        #     x, y, xlabel, ylabel, caption_point, xerr, yerr, b=0, koef=[1.1, 1.1])
-        # plt.savefig('K(I)')
-        # print('R_x ', k*h*10**6, '+-', sigma[0]*10**6*h)
-        # n = 1/(-k*h*e_e)*10**-21
-        # sigma_n = n*abs(sigma[0]/k)
-        # print('n = ', n, '+-', sigma_n)
-        # sig = 1/4.097*5/4/10**-3
-        # sig_sig = sig*((5*10**-5)**2+(1/100)**2)**0.5
-        # print('sigma = ', sig, '+-', sig_sig)
-        # b = -sig*k*h*10**4
-        # sig_b = b*((sig_sig/sig)**2+(sigma[0]/k)**2)**0.5
-        # print('b = ', b, '+-', sig_b)

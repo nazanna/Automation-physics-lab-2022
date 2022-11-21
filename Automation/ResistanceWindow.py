@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import (QPushButton,
                              QLineEdit
                              )
 from Abstract_window import AbstractWindow
+import time
 
 
 class ResistanceWindow(AbstractWindow):
@@ -72,7 +73,9 @@ class ResistanceWindow(AbstractWindow):
         self.start.setEnabled(False)
         current=10
         voltage=15
-        # voltage, current = self.measure()
+        voltage, current = self.measure()
+        print(voltage*self.parent.l*self.parent.a)
+        print(current*self.parent.L)
         
         self.parent.sigma = current*self.parent.L/(voltage*self.parent.l*self.parent.a)
         self.parent.sigma_sigma = self.parent.sigma*((5*10**-5)**2+(0.0035/100)**2)**0.5
@@ -81,6 +84,13 @@ class ResistanceWindow(AbstractWindow):
         self.menu.setEnabled(True)
         
     def measure(self):
+        
+        msg = 'VOLTage '+str(1)+'\n'
+        self.parent.ser.write(msg.encode('ascii'))
+        time.sleep(1)
+        
+        
+        
         f_amp = open(self.parent.amp_name, 'w')
         f_amp.write('Measure:Current:DC?\n')
         f_amp.close()
@@ -95,4 +105,8 @@ class ResistanceWindow(AbstractWindow):
         f_volt = open(self.parent.volt_name, 'r')
         v = '{:.9f}'.format(float(f_volt.read(15))*10**3)
         f_volt.close()
-        return v, a
+        return float(v), float(a)
+    
+
+    def closeEvent(self, event):
+        self.parent.close()

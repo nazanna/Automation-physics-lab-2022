@@ -26,7 +26,7 @@ class GraduationWindow(AbstractWindow):
 
         self.setWindowTitle('Градуировка электромагнита')
         self.parent = parent
-        self.volt = 0
+        self.volt = 1
 
         # make csv file
         self.parent.flow_dataname = 'Induction_data.csv'
@@ -78,7 +78,7 @@ class GraduationWindow(AbstractWindow):
 
     def enter_value(self):
         self.lineEdit.setReadOnly(True)
-        self.no_data()
+        self.take_data()
         self.lineEdit.clear()
         self.lineEdit.setReadOnly(False)
         
@@ -105,16 +105,15 @@ class GraduationWindow(AbstractWindow):
         msg = 'VOLTage '+str(self.volt)+'\n'
         self.parent.ser.write(msg.encode('ascii'))
         time.sleep(1)
-
-        msg = 'MEASure:Current?\n'
-        self.parent.ser.write(msg.encode('ascii'))
-        time.sleep(1)
-        bytesToRead = self.parent.ser.inWaiting()
-        I_M = self.parent.ser.read(bytesToRead)
-        self.volt += 5
+        
+        
+        f_amp = open(self.parent.I_M_name, 'w')
+        f_amp.write('Measure:Current:DC?\n')
+        f_amp.close()
+        f_amp = open(self.parent.I_M_name, 'r')
+        I_M = '{:.9f}'.format(float(f_amp.read(15))*10**3)
+        f_amp.close()
         self.save_data([b, self.volt, I_M, t])
         
     def closeEvent(self, event):
-        pass
-        # msg = 'VOLTage '+str(0)+'\n'
-        # self.parent.ser.write(msg.encode('ascii'))
+        self.parent.close()

@@ -35,7 +35,7 @@ class ThreadData(QtCore.QThread):
     def run(self):
         self.running = True
         while self.running:
-            self.parent.no_data()
+            self.parent.take_data()
             self.sleep(1)
 
 
@@ -49,11 +49,11 @@ class MainWindow(AbstractWindow):
         self.resize(1400, 800)
         self.number_iteration = 1
         self.start_time = 0
-        self.volt = 0
+        self.volt = 0.05
 
         # make masthead
         self.parent.dataname = 'data.csv'
-        heads = ['U_34,mV', 'I_M,mA', 'U_0,mV', 'I_0,mA', 'E, mV', 'N', 't,ms']
+        heads = ['U_34,mV', 'I_M,mA', 'U_0,mV', 'I_0,mA', 'N', 't,ms']
         with open(os.path.join(self.parent.folder, self.parent.dataname), 'w') as file:
             wr = csv.writer(file)
             wr.writerow(heads)
@@ -109,6 +109,7 @@ class MainWindow(AbstractWindow):
         self.stop.setEnabled(True)
         if self.start_time == 0:
             self.start_time = round(time.time()*1000)
+            self.this_time = self.start_time
         self.start.setEnabled(False)
         self.new.setEnabled(True)
         if not self.data_thread.running:
@@ -122,7 +123,8 @@ class MainWindow(AbstractWindow):
 
     def new_clicked(self):
         self.number_iteration += 1
-        self.volt = 0
+        self.volt += 0.05
+        self.this_time = round(time.time()*1000)
         if not self.data_thread.running:
             self.data_thread.start()
         self.start.setEnabled(False)
@@ -137,13 +139,12 @@ class MainWindow(AbstractWindow):
         current_time = round(time.time()*1000)
         v = str((current_time-self.start_time)/60)
         t = str(current_time-self.start_time)
-        if float(self.volt) <= 0.1:
+        if float(current_time-self.this_time) <= 1:
             self.u_0 = v
         a = str(float(v)/100)
         I_M = v
-        self.save_data([v, I_M, self.u_0, a, self.volt,
+        self.save_data([v, I_M, self.u_0, a,
                        self.number_iteration, t])
-        self.volt = str(float(self.volt)+5)
         if float(a) > 1:
             self.stop_clicked()
 
@@ -157,17 +158,23 @@ class MainWindow(AbstractWindow):
                                QTableWidgetItem(str(data[i])))
 
     def take_data(self):
+        
+        current_time = round(time.time()*1000)
+        t = str(current_time-self.start_time)
+        
         # measure voltage and current
         msg = 'VOLTage '+str(self.volt)+'\n'
         self.parent.ser.write(msg.encode('ascii'))
         time.sleep(1)
-
-        msg = 'MEASure:Current?\n'
-        self.parent.ser.write(msg.encode('ascii'))
-        time.sleep(1)
-        bytesToRead = self.parent.ser.inWaiting()
-        I_M = self.parent.ser.read(bytesToRead)
-        self.volt += 5
+        
+        
+        
+        f_amp = open(self.parent.I_M_name, 'w')
+        f_amp.write('Measure:Current:DC?\n')
+        f_amp.close()
+        f_amp = open(self.parent.I_M_name, 'r')
+        I_M = '{:.9f}'.format(float(f_amp.read(15))*10**3)
+        f_amp.close()
 
         f_volt = open(self.parent.volt_name, 'w')
         f_volt.write('Measure:Voltage:DC?\n')
@@ -178,28 +185,25 @@ class MainWindow(AbstractWindow):
 
         f_volt = open(self.parent.volt_name, 'r')
         v = '{:.9f}'.format(float(f_volt.read(15))*10**3)
-        if self.volt == 0:
+        if float(current_time-self.this_time) <= 100:
             self.u_0 = v
         f_amp = open(self.parent.amp_name, 'r')
         a = '{:.9f}'.format(float(f_amp.read(15))*10**3)
-        print(a)
+        print((current_time-self.this_time) )
         # protect of errors:
-        if a > 1:
+        if float(a) > 1:
             self.stop_clicked()
 
         f_volt.close()
         f_amp.close()
 
-        current_time = round(time.time()*1000)
-        t = str(current_time-self.start_time)
 
         self.save_data([v, I_M, self.u_0, a, self.volt,
                        self.number_iteration, t])
 
     def closeEvent(self, event):
         self.data_thread.running = False
-        # msg = 'VOLTage '+str(0)+'\n'
-        # self.parent.ser.write(msg.encode('ascii'))
+        self.parent.close()
 
 
 
