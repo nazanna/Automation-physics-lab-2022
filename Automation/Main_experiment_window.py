@@ -35,7 +35,7 @@ class ThreadData(QtCore.QThread):
     def run(self):
         self.running = True
         while self.running:
-            self.parent.take_data()
+            self.parent.no_data()
             self.sleep(1)
 
 
@@ -53,7 +53,7 @@ class MainWindow(AbstractWindow):
 
         # make masthead
         self.parent.dataname = 'data.csv'
-        heads = ['U_34,mV', 'I_M,mA', 'U_0,mV', 'I_0,mA', 'N', 't,ms']
+        heads = ['U_34,mV', 'I_M,mA', 'U_0,mV', 'I_0,mA', 'E,mV', 'N', 't,ms']
         with open(os.path.join(self.parent.folder, self.parent.dataname), 'w') as file:
             wr = csv.writer(file)
             wr.writerow(heads)
@@ -70,7 +70,7 @@ class MainWindow(AbstractWindow):
         self.stop.clicked.connect(self.stop_clicked)
         self.stop.setEnabled(False)
 
-        self.new = QPushButton('Новый ток')
+        self.new = QPushButton('Новое напряжение')
         self.new.clicked.connect(self.new_clicked)
         self.new.setEnabled(False)
 
@@ -123,7 +123,7 @@ class MainWindow(AbstractWindow):
 
     def new_clicked(self):
         self.number_iteration += 1
-        self.volt += 0.05
+        self.volt += 0
         self.this_time = round(time.time()*1000)
         if not self.data_thread.running:
             self.data_thread.start()
@@ -139,7 +139,7 @@ class MainWindow(AbstractWindow):
         current_time = round(time.time()*1000)
         v = str((current_time-self.start_time)/60)
         t = str(current_time-self.start_time)
-        if float(current_time-self.this_time) <= 1:
+        if self.number_iteration == 0:
             self.u_0 = v
         a = str(float(v)/100)
         I_M = v
@@ -196,7 +196,7 @@ class MainWindow(AbstractWindow):
 
         f_volt.close()
         f_amp.close()
-
+        self.volt += 0.05
 
         self.save_data([v, I_M, self.u_0, a, self.volt,
                        self.number_iteration, t])

@@ -30,9 +30,9 @@ class Start:
             self.app = QApplication(sys.argv)
         else:
             self.app = QApplication.instance()
+        self.current=0
         self.window = StartWindow(self)
-        
-        self.add_equip()
+        # self.add_equip()
         
         self.draw()
         self.app.exec()
@@ -92,12 +92,12 @@ class Start:
     
     
     def close(self):
-        
+        pass
         msg = 'VOLTage '+str(0)+'\n'
         self.ser.write(msg.encode('ascii'))
         
     def __del__(self):
-        
+        pass
         msg = 'OUTput off\n'
         self.ser.write(msg.encode('ascii'))
                     
@@ -110,14 +110,6 @@ class StartWindow(AbstractWindow):
         super().__init__()
 
         self.setWindowTitle('Эффект Холла в полупроводниках')
-        
-        # palette = QPalette()
-        # img = QImage('image.jpg')
-        # scaled = img.scaled(self.size(), KeepAspectRatioByExpanding)
-        # palette.setBrush(QPalette.Window, QBrush(scaled))
-        # self.setPalette(palette)
-        
-        # self.setStyleSheet('.QWidget {background-image: url(style.jpg);}') 
         self.parent = parent
         self.centralwidget = QWidget()
         self.resize(1400, 800)
@@ -130,43 +122,54 @@ class StartWindow(AbstractWindow):
 
         self.flow = QPushButton('Градуировка электромагнита')
         self.flow.clicked.connect(self.flow_click)
-        if not self.parent.foldername:
+        if not self.parent.foldername or not self.parent.current==0:
             self.flow.setEnabled(False)
+        self.flow_text = QLabel('Текст про градуировку ', self)
             
         self.sign = QPushButton('Знак носителей')
         self.sign.clicked.connect(self.sign_click)
-        if not self.parent.foldername:
+        if not self.parent.current==2:
             self.sign.setEnabled(False)
+        self.sign_text = QLabel('Текст про знак ', self)
             
         self.res = QPushButton('Удельная проводимость')
         self.res.clicked.connect(self.res_click)
-        if not self.parent.foldername:
+        if not self.parent.current==3:
             self.res.setEnabled(False)
+        self.res_text = QLabel('Текст про проводимость ', self)
             
         self.chart = QPushButton('Обработка данных')
         self.chart.clicked.connect(self.chart_click)
-        if not self.parent.foldername:
+        if not self.parent.current==4:
             self.chart.setEnabled(False)
+        self.chart_text = QLabel('Текст про обработку ', self)
                        
         self.main = QPushButton('Основной эксперимент')
         self.main.clicked.connect(self.main_click)
-        if not self.parent.foldername:
+        if not self.parent.current==1:
             self.main.setEnabled(False)
         if self.parent.foldername:
             self.lineEdit.setReadOnly(True)
+        self.main_text = QLabel('Текст про основу ', self)
             
         self.hbox_layout = QGridLayout(self.centralwidget)
         self.hbox_layout.setRowStretch(1, 1)
         self.hbox_layout.addWidget(self.lineEdit, 1, 0, 1, 2)
         self.hbox_layout.addWidget(self.flow, 2, 0)
-        self.hbox_layout.addWidget(self.sign, 3, 0)
-        self.hbox_layout.addWidget(self.res, 3, 1)
-        self.hbox_layout.addWidget(self.main, 2, 1)
-        self.hbox_layout.addWidget(self.chart, 4, 0, 1, -1)
+        self.hbox_layout.addWidget(self.flow_text, 2, 1)
+        self.hbox_layout.addWidget(self.main, 3, 0)
+        self.hbox_layout.addWidget(self.main_text, 3, 1)
+        self.hbox_layout.addWidget(self.sign, 4, 0)
+        self.hbox_layout.addWidget(self.sign_text, 4, 1)
+        self.hbox_layout.addWidget(self.res, 5, 0)
+        self.hbox_layout.addWidget(self.res_text, 5, 1)
+        self.hbox_layout.addWidget(self.chart, 6, 0)
+        self.hbox_layout.addWidget(self.chart_text, 6, 1)
 
     def flow_click(self):
         self.parent.number = 10
         self.parent.change_number()
+        self.parent.current+=1
         
     def chart_click(self):
         self.parent.number = 50
@@ -175,14 +178,17 @@ class StartWindow(AbstractWindow):
     def main_click(self):
         self.parent.number = 20
         self.parent.change_number()
+        self.parent.current+=1
         
     def res_click(self):
         self.parent.number = 40
         self.parent.change_number()
+        self.parent.current+=1
         
     def sign_click(self):
         self.parent.number = 30
         self.parent.change_number()
+        self.parent.current+=1
 
     def enter_name(self):
         # make folder
@@ -192,11 +198,10 @@ class StartWindow(AbstractWindow):
             os.mkdir(self.parent.folder)
 
         self.flow.setEnabled(True)
-        self.main.setEnabled(True)
-        self.sign.setEnabled(True)
-        self.res.setEnabled(True)
-        self.chart.setEnabled(True)
         self.lineEdit.setReadOnly(True)
+       
+        
+        
         
 
 

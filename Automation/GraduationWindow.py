@@ -78,7 +78,7 @@ class GraduationWindow(AbstractWindow):
 
     def enter_value(self):
         self.lineEdit.setReadOnly(True)
-        self.take_data()
+        self.no_data()
         self.lineEdit.clear()
         self.lineEdit.setReadOnly(False)
         

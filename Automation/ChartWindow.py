@@ -52,7 +52,11 @@ class ChartWindow(AbstractWindow):
         self.label.setPixmap(pixmap)
 
         self.text = QTextBrowser()
-        self.text.setText(self.make_text())
+        text = self.make_text()
+        self.parent.text_name = 'Results.txt'
+        with open(os.path.join(self.parent.folder, self.parent.text_name), 'w') as file:
+            file.write(text)
+        self.text.setText(text)
 
         self.hbox_layout = QGridLayout(self.centralwidget)
         self.hbox_layout.addWidget(self.label, 0, 0)
@@ -140,4 +144,6 @@ class ChartWindow(AbstractWindow):
 
         s4 = 'b = ' + str(round(self.parent.b*10**4)) + '  +-  ' + \
             str(round(self.parent.sigma_b*10**4)) + ', см^3/(В*с)'+'\n'+'\n'
+            
+            
         return s0+s1+s2+s3+s4
