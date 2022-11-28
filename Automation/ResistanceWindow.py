@@ -73,7 +73,7 @@ class ResistanceWindow(AbstractWindow):
         self.start.setEnabled(False)
         current=10
         voltage=15
-        # voltage, current = self.measure()
+        voltage, current = self.measure()
         print(voltage*self.parent.l*self.parent.a)
         print(current*self.parent.L)
         

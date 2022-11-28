@@ -35,7 +35,7 @@ class ThreadData(QtCore.QThread):
     def run(self):
         self.running = True
         while self.running:
-            self.parent.no_data()
+            self.parent.take_data()
             self.sleep(1)
 
 
@@ -123,7 +123,7 @@ class MainWindow(AbstractWindow):
 
     def new_clicked(self):
         self.number_iteration += 1
-        self.volt += 0
+        self.volt = 0
         self.this_time = round(time.time()*1000)
         if not self.data_thread.running:
             self.data_thread.start()

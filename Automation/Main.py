@@ -32,7 +32,7 @@ class Start:
             self.app = QApplication.instance()
         self.current=0
         self.window = StartWindow(self)
-        # self.add_equip()
+        self.add_equip()
         
         self.draw()
         self.app.exec()
@@ -100,6 +100,9 @@ class Start:
         pass
         msg = 'OUTput off\n'
         self.ser.write(msg.encode('ascii'))
+        
+        
+        
                     
             
         
@@ -124,25 +127,25 @@ class StartWindow(AbstractWindow):
         self.flow.clicked.connect(self.flow_click)
         if not self.parent.foldername or not self.parent.current==0:
             self.flow.setEnabled(False)
-        self.flow_text = QLabel('Текст про градуировку ', self)
+        self.flow_text = QLabel('Измеряется зависимость тока через электромагнит от магнитной индукции при помощи измерителя магнитной индукции', self)
             
         self.sign = QPushButton('Знак носителей')
         self.sign.clicked.connect(self.sign_click)
         if not self.parent.current==2:
             self.sign.setEnabled(False)
-        self.sign_text = QLabel('Текст про знак ', self)
+        self.sign_text = QLabel('Устанавливается характер проводимости: электронный или дырочный', self)
             
         self.res = QPushButton('Удельная проводимость')
         self.res.clicked.connect(self.res_click)
         if not self.parent.current==3:
             self.res.setEnabled(False)
-        self.res_text = QLabel('Текст про проводимость ', self)
+        self.res_text = QLabel('Производится измерение оммического сопротивления образца', self)
             
         self.chart = QPushButton('Обработка данных')
         self.chart.clicked.connect(self.chart_click)
         if not self.parent.current==4:
             self.chart.setEnabled(False)
-        self.chart_text = QLabel('Текст про обработку ', self)
+        self.chart_text = QLabel('Выполняется расчет всех констант образца и построение графиков', self)
                        
         self.main = QPushButton('Основной эксперимент')
         self.main.clicked.connect(self.main_click)
@@ -150,7 +153,7 @@ class StartWindow(AbstractWindow):
             self.main.setEnabled(False)
         if self.parent.foldername:
             self.lineEdit.setReadOnly(True)
-        self.main_text = QLabel('Текст про основу ', self)
+        self.main_text = QLabel('Определяется ЭДС Холла', self)
             
         self.hbox_layout = QGridLayout(self.centralwidget)
         self.hbox_layout.setRowStretch(1, 1)

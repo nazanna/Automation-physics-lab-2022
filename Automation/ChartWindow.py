@@ -77,7 +77,7 @@ class ChartWindow(AbstractWindow):
         self.parent.data_grad.xlabel = 'I$_M$,mA'
         self.parent.data_grad.ylabel = 'B,mTl'
         self.parent.data_grad.xerr = 0.0035/100*self.parent.data_grad.x
-        self.parent.data_grad.yerr = 0.02*self.parent.data_grad.y
+        self.parent.data_grad.yerr = 0.05*self.parent.data_grad.y
         plt.figure(dpi=500, figsize=(8, 5))
         self.parent.data_grad.make_point_grafic()
 

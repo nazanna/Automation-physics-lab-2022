@@ -61,7 +61,7 @@ class SignWindow(AbstractWindow):
     def start_clicked(self):
         self.start.setEnabled(False)
         without_field=10
-        # without_field = self.measure()
+        without_field = self.measure()
         self.without_field_value.setText(str(without_field)+', mV')
         self.field.setEnabled(True)
         
@@ -69,7 +69,7 @@ class SignWindow(AbstractWindow):
         with_field=90
         
         
-        # with_field = self.measure()
+        with_field = self.measure()
         self.with_field_value.setText(str(with_field)+', mV')
         self.menu.setEnabled(True)
         
