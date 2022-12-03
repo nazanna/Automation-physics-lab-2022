@@ -32,7 +32,7 @@ class Start:
             self.app = QApplication.instance()
         self.current=0
         self.window = StartWindow(self)
-        self.add_equip()
+        # self.add_equip()
         
         self.draw()
         self.app.exec()
@@ -147,7 +147,7 @@ class StartWindow(AbstractWindow):
             self.chart.setEnabled(False)
         self.chart_text = QLabel('Выполняется расчет всех констант образца и построение графиков', self)
                        
-        self.main = QPushButton('Основной эксперимент')
+        self.main = QPushButton('Определение ЭДС Холла')
         self.main.clicked.connect(self.main_click)
         if not self.parent.current==1:
             self.main.setEnabled(False)
@@ -203,6 +203,17 @@ class StartWindow(AbstractWindow):
         self.flow.setEnabled(True)
         self.lineEdit.setReadOnly(True)
        
+    def testing_analisis(self):
+        self.chart.setEnabled(True)
+        self.parent.foldername = 'Перерптлв'
+        self.parent.folder = os.path.join(os.getcwd(), self.parent.foldername)
+        if not os.path.exists(self.parent.folder):
+            os.mkdir(self.parent.folder)
+        self.parent.dataname = 'data.csv'
+        self.parent.flow_dataname = 'Induction_data.csv'
+        self.parent.a=2*10**-3
+        self.parent.sigma = -313
+        self.parent.sigma_sigma=0
         
         
         

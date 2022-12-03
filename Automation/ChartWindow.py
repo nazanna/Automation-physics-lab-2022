@@ -35,7 +35,9 @@ class ChartWindow(AbstractWindow):
         self.parent = parent
 
         (a, eps) = self.make_grad()
+        print(*a)
         self.make_main(a, eps)
+        
 
         self.setWindowTitle('Основной эксперимент. Обработка данных')
         self.resize(1400, 800)
@@ -54,9 +56,10 @@ class ChartWindow(AbstractWindow):
         self.text = QTextBrowser()
         text = self.make_text()
         self.parent.text_name = 'Results.txt'
-        with open(os.path.join(self.parent.folder, self.parent.text_name), 'w') as file:
-            file.write(text)
-        self.text.setText(text)
+        # with open(os.path.join(self.parent.folder, self.parent.text_name), 'w') as file:
+        #     file.write(text)
+        # self.text.setText(text)
+        print(text)
 
         self.hbox_layout = QGridLayout(self.centralwidget)
         self.hbox_layout.addWidget(self.label, 0, 0)
@@ -82,12 +85,12 @@ class ChartWindow(AbstractWindow):
         self.parent.data_grad.make_point_grafic()
 
         a, sigma = curve_fit(
-            self.B, self.parent.data_grad.x, self.parent.data_grad.y)
+            self.B, self.parent.data_grad.x/1000, self.parent.data_grad.y/10**3)
         sigma = abs(np.sqrt(np.diag(sigma))/a)
         eps = (np.min(sigma)**2+(0.0035/100)**2+0.02**2)**0.5
         x_range = np.arange(min(self.parent.data_grad.x),
                             max(self.parent.data_grad.x), step=0.001)
-        y_fit = self.B(x_range, a[0], a[1], a[2])
+        y_fit = self.B(x_range/1000, a[0], a[1], a[2])*10**3
         plt.plot(x_range, y_fit)
         plt.savefig(os.path.join(
             self.parent.folder,
@@ -104,7 +107,7 @@ class ChartWindow(AbstractWindow):
         e = np.array((self.parent.data_main.data['U_34,mV'] -
                       self.parent.data_main.data['U_0,mV'])/10**3)
         b = np.array(
-            self.B(self.parent.data_main.data['I_M,mA'], a[0], a[1], a[2]))
+            self.B(self.parent.data_main.data['I_M,mA']/10**3, a[0], a[1], a[2]))
         eds = chr(949)
         self.parent.data_main.x = np.array(
             self.parent.data_main.data['I_0,mA']*b)
@@ -128,22 +131,24 @@ class ChartWindow(AbstractWindow):
 
         self.parent.sigma_b = self.parent.b*((self.parent.sigma_sigma/self.parent.sigma)**2 +
                                              (sigma[0]/k)**2)**0.5
+        print(sigma[0]/ k)
 
     def make_text(self):
         s0 = 'Вычисленные постоянные равны:'+'\n' +\
             'R_X - постоянная Холла, '+'\n'+' n - концентрация носителей заряда,'+'\n' +\
              'sigma - удельная проводимость, '+'\n'+' b - подвижность'+'\n'+'\n'
 
-        s1 = 'R_X = ' + str(round(self.parent.R_H*10**10)) + '  +-  ' + \
-            str(round(self.parent.sigma_R_H*10**10)) + \
+        s1 = 'R_X = ' + str(int(round(self.parent.R_H*10**10, -1))) + '  +-  ' + \
+            str(int(round(self.parent.sigma_R_H*10**10, -1))) + \
             ' , 10^-10 м^3/Кл'+'\n'+'\n'
-        s2 = 'n = ' + str(round(self.parent.n)) + '  +-  ' + \
-            str(round(self.parent.sigma_n)) + ' , 1/м^3'+'\n'+'\n'
+        s2 = 'n = ' + str(int(round(self.parent.n, -1))) + '  +-  ' + \
+            str(int(round(self.parent.sigma_n, -1))) + ' , 10^21  1/м^3'+'\n'+'\n'
         s3 = 'sigma = ' + str(round(self.parent.sigma)) + '  +-  ' + \
             str(round(self.parent.sigma_sigma)) + ', 1/(Ом*м)'+'\n'+'\n'
 
-        s4 = 'b = ' + str(round(self.parent.b*10**4)) + '  +-  ' + \
-            str(round(self.parent.sigma_b*10**4)) + ', см^3/(В*с)'+'\n'+'\n'
+        s4 = 'b = ' + str(round(self.parent.b*10**4), 2) + '  +-  ' + \
+            str(round(self.parent.sigma_b*10**4), 2) + ', см^2/(В*с)'+'\n'+'\n'
+        
             
             
         return s0+s1+s2+s3+s4

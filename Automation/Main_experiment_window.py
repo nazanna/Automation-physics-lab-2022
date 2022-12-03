@@ -20,13 +20,17 @@ from PyQt6.QtWidgets import (QLabel,
                              QGridLayout,
                              QTableWidgetItem,
                              QHeaderView,
-                             QTextBrowser)
+                             QTextBrowser,
+                             QDialog,
+                             QDialogButtonBox,
+                             QVBoxLayout
+                             )
+from PyQt5.QtWidgets import QMessageBox
 from Analisis_data import Data
 from Abstract_window import AbstractWindow
 
 
 class ThreadData(QtCore.QThread):
-
     def __init__(self, parent):
         QtCore.QThread.__init__(self)
         self.running = False
@@ -38,18 +42,35 @@ class ThreadData(QtCore.QThread):
             self.parent.take_data()
             self.sleep(1)
 
+class ThreadWarning(QtCore.QThread):
+    def __init__(self, parent):
+        QtCore.QThread.__init__(self)
+        self.running = False
+        self.parent = parent
+        
+    def run(self):
+        self.running = True
+        while self.running:
+            self.sleep(1)
+            self.dlg.show()
+
+
+
 
 class MainWindow(AbstractWindow):
     def __init__(self, parent):
         super().__init__()
 
-        self.setWindowTitle('Основной эксперимент. Получение данных')
+        self.setWindowTitle('Определение ЭДС Холла')
         self.parent = parent
+    
         self.data_thread = ThreadData(self)
+        # self.thread = ThreadWarning(self)
         self.resize(1400, 800)
         self.number_iteration = 1
         self.start_time = 0
         self.volt = 0.05
+        self.U_0={}
 
         # make masthead
         self.parent.dataname = 'data.csv'
@@ -85,22 +106,25 @@ class MainWindow(AbstractWindow):
         self.table = QTableWidget(self)
         self.table.setColumnCount(len(heads))
         self.table.setRowCount(0)
+        
+        rowPosition = self.table.rowCount()
+        it = QTableWidgetItem(str(rowPosition))
         self.table.setHorizontalHeaderLabels(heads)
         header = self.table.horizontalHeader()
         for i in range(len(heads)):
             header.setSectionResizeMode(i, QHeaderView.ResizeMode.Stretch)
         self.table.resizeColumnsToContents()
+        self.table.scrollToItem(it)   
 
         # Adding the table to the grid
-        self.grid_layout.addWidget(self.table, 0, 0, -1, 1)
-        self.grid_layout.addWidget(self.lineEdit, 0, 2, 1, -1)
-        self.grid_layout.addWidget(self.start, 1, 2)
-        self.grid_layout.addWidget(self.stop, 1, 3)
-        self.grid_layout.addWidget(self.new, 2, 2, 1, -1)
-        self.grid_layout.addWidget(self.menu, 3, 2, 1, -1)
+        self.grid_layout.addWidget(self.table, 1, 0, -1, 1)
+        self.grid_layout.addWidget(self.lineEdit, 1, 2, 1, -1)
+        self.grid_layout.addWidget(self.start, 2, 2)
+        self.grid_layout.addWidget(self.stop, 2, 3)
+        self.grid_layout.addWidget(self.new, 3, 2, 1, -1)
+        self.grid_layout.addWidget(self.menu, 4, 2, 1, -1)
 
     def enter_a(self):
-        # TODO
         self.parent.a = float(self.lineEdit.text())/10**3
         self.start.setEnabled(True)
         self.lineEdit.setReadOnly(True)
@@ -139,14 +163,15 @@ class MainWindow(AbstractWindow):
         current_time = round(time.time()*1000)
         v = str((current_time-self.start_time)/60)
         t = str(current_time-self.start_time)
-        if self.number_iteration == 0:
-            self.u_0 = v
-        a = str(float(v)/100)
+        self.u_0 = v
+        a = str(float(v)/10)
         I_M = v
-        self.save_data([v, I_M, self.u_0, a,
+        self.save_data([v, I_M, self.u_0, a, self.volt,
                        self.number_iteration, t])
         if float(a) > 1:
             self.stop_clicked()
+            
+            
 
     def save_data(self, data):
         with open(os.path.join(self.parent.folder, self.parent.dataname), 'a') as file:
@@ -156,6 +181,7 @@ class MainWindow(AbstractWindow):
         for i in range(len(data)):
             self.table.setItem(self.table.rowCount()-1, i,
                                QTableWidgetItem(str(data[i])))
+        self.table.scrollToBottom()
 
     def take_data(self):
         
@@ -172,9 +198,6 @@ class MainWindow(AbstractWindow):
         f_amp = open(self.parent.I_M_name, 'w')
         f_amp.write('Measure:Current:DC?\n')
         f_amp.close()
-        f_amp = open(self.parent.I_M_name, 'r')
-        I_M = '{:.9f}'.format(float(f_amp.read(15))*10**3)
-        f_amp.close()
 
         f_volt = open(self.parent.volt_name, 'w')
         f_volt.write('Measure:Voltage:DC?\n')
@@ -182,24 +205,32 @@ class MainWindow(AbstractWindow):
         f_amp = open(self.parent.amp_name, 'w')
         f_amp.write('Measure:Current:DC?\n')
         f_amp.close()
+        
+        f_amp = open(self.parent.I_M_name, 'r')
+        I_M = '{:.9f}'.format(float(f_amp.read(15))*10**3)
+        f_amp.close()
 
         f_volt = open(self.parent.volt_name, 'r')
         v = '{:.9f}'.format(float(f_volt.read(15))*10**3)
-        if float(current_time-self.this_time) <= 100:
-            self.u_0 = v
+        try:
+            self.u_0 = self.U_0[self.volt]
+        except KeyError:
+            self.U_0[self.volt] = v
+            self.u_0 = self.U_0[self.volt]
+        
         f_amp = open(self.parent.amp_name, 'r')
         a = '{:.9f}'.format(float(f_amp.read(15))*10**3)
         print((current_time-self.this_time) )
         # protect of errors:
-        if float(a) > 1:
+        if float(a) > 1 or self.table.rowCount()>=15*self.number_iteration:
             self.stop_clicked()
 
         f_volt.close()
         f_amp.close()
-        self.volt += 0.05
-
         self.save_data([v, I_M, self.u_0, a, self.volt,
                        self.number_iteration, t])
+        self.volt += 0.05
+
 
     def closeEvent(self, event):
         self.data_thread.running = False

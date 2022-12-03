@@ -77,8 +77,8 @@ class ResistanceWindow(AbstractWindow):
         print(voltage*self.parent.l*self.parent.a)
         print(current*self.parent.L)
         
-        self.parent.sigma = current*self.parent.L/(voltage*self.parent.l*self.parent.a)
-        self.parent.sigma_sigma = self.parent.sigma*((5*10**-5)**2+(0.0035/100)**2)**0.5
+        self.parent.sigma = abs(current*self.parent.L/(voltage*self.parent.l*self.parent.a))
+        self.parent.sigma_sigma = abs(self.parent.sigma*((5*10**-5)**2+(0.0035/100)**2)**0.5)
         self.current_value.setText(str(current)+', mA')
         self.voltage_value.setText(str(voltage)+', mV')
         self.menu.setEnabled(True)

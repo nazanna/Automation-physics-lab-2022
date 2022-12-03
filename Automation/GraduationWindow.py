@@ -78,7 +78,7 @@ class GraduationWindow(AbstractWindow):
 
     def enter_value(self):
         self.lineEdit.setReadOnly(True)
-        self.take_data()
+        self.no_data()
         self.lineEdit.clear()
         self.lineEdit.setReadOnly(False)
         
@@ -98,6 +98,7 @@ class GraduationWindow(AbstractWindow):
         for i in range(len(data)):
             self.table.setItem(self.table.rowCount()-1, i,
                                QTableWidgetItem(str(data[i])))
+        self.table.scrollToBottom()
 
     def take_data(self):        
         t = (round(time.time()*1000)-self.start_time)
