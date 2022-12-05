@@ -32,7 +32,7 @@ class Start:
             self.app = QApplication.instance()
         self.current=0
         self.window = StartWindow(self)
-        # self.add_equip()
+        self.add_equip()
         
         self.draw()
         self.app.exec()

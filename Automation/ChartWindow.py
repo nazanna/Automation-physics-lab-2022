@@ -146,8 +146,8 @@ class ChartWindow(AbstractWindow):
         s3 = 'sigma = ' + str(round(self.parent.sigma)) + '  +-  ' + \
             str(round(self.parent.sigma_sigma)) + ', 1/(Ом*м)'+'\n'+'\n'
 
-        s4 = 'b = ' + str(round(self.parent.b*10**4), 2) + '  +-  ' + \
-            str(round(self.parent.sigma_b*10**4), 2) + ', см^2/(В*с)'+'\n'+'\n'
+        s4 = 'b = ' + str(round(self.parent.b*10**4, 2)) + '  +-  ' + \
+            str(round(self.parent.sigma_b*10**4, 2)) + ', см^2/(В*с)'+'\n'+'\n'
         
             
             
