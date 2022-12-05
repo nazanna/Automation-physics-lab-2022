@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.11.26)  4 DEC 2022 00:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.11.26)  5 DEC 2022 11:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -826,7 +826,7 @@ msfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb
 ></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/f
 onts/type1/public/cm-super/sfsx1200.pfb></usr/share/texmf/fonts/type1/public/cm
 -super/sfti1200.pfb>
-Output written on Manual.pdf (4 pages, 194800 bytes).
+Output written on Manual.pdf (4 pages, 194770 bytes).
 PDF statistics:
  120 PDF objects out of 1000 (max. 8388607)
  91 compressed objects within 1 object stream
