@@ -103,9 +103,6 @@ class GraduationWindow(AbstractWindow):
     def take_data(self):        
         t = (round(time.time()*1000)-self.start_time)
         b = self.lineEdit.text()
-        msg = 'VOLTage '+str(self.volt)+'\n'
-        self.parent.ser.write(msg.encode('ascii'))
-        time.sleep(1)
         
         
         f_amp = open(self.parent.I_M_name, 'w')
@@ -114,7 +111,7 @@ class GraduationWindow(AbstractWindow):
         f_amp = open(self.parent.I_M_name, 'r')
         I_M = '{:.9f}'.format(float(f_amp.read(15))*10**3)
         f_amp.close()
-        self.save_data([b, self.volt, I_M, t])
+        self.save_data([b, 0, I_M, t])
         
     def closeEvent(self, event):
         self.parent.close()

@@ -183,7 +183,7 @@ def B(x, b, c, d):
 def make_grad():
     data = make_dic('grad.csv')
     f_0 = 0.1
-    f = data['Ф']-f_0
+    f = data['F']-f_0
     s = 75 * 10 ** -4
     b = f * 10**-3 / s
     x = data['I']

@@ -32,7 +32,12 @@ class Start:
             self.app = QApplication.instance()
         self.current=0
         self.window = StartWindow(self)
-        self.add_equip()
+        
+        
+        l = 'usbtmc'+str(1)
+        self.I_M_name =  os.path.join('/dev', l)
+        # self.add_equip()
+        
         
         self.draw()
         self.app.exec()
@@ -143,8 +148,8 @@ class StartWindow(AbstractWindow):
             
         self.chart = QPushButton('Обработка данных')
         self.chart.clicked.connect(self.chart_click)
-        if not self.parent.current==4:
-            self.chart.setEnabled(False)
+        # if not self.parent.current==4:
+            # self.chart.setEnabled(False)
         self.chart_text = QLabel('Выполняется расчет всех констант образца и построение графиков', self)
                        
         self.main = QPushButton('Определение ЭДС Холла')

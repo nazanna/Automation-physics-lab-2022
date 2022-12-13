@@ -36,7 +36,7 @@ class ChartWindow(AbstractWindow):
 
         (a, eps) = self.make_grad()
         print(*a)
-        self.make_main(a, eps)
+        # self.make_main(a, eps)
         
 
         self.setWindowTitle('Основной эксперимент. Обработка данных')
@@ -69,7 +69,9 @@ class ChartWindow(AbstractWindow):
         return x**2*b+x*c+d
 
     def make_grad(self):
+        
 
+        self.parent.flow_dataname = 'Induction_data.csv'
         self.parent.grad_chartname = 'Graduation_chart.png'
         self.parent.data_grad = Data(data_filename=os.path.join(
             self.parent.folder, self.parent.flow_dataname))
