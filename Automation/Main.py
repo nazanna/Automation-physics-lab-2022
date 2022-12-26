@@ -36,7 +36,7 @@ class Start:
         
         l = 'usbtmc'+str(1)
         self.I_M_name =  os.path.join('/dev', l)
-        # self.add_equip()
+        self.add_equip()
         
         
         self.draw()
@@ -84,13 +84,13 @@ class Start:
             f.close()
             f = open(file, 'r')
             st = f.read(35)
-            # print(st)
+            print(st, i)
             f.close()
             if st=='AKIP,AKIP-2101/2,NDM36GBD4R0065,3.0':
-                self.I_M_name =  os.path.join('/dev', l)
+                self.amp_name =  os.path.join('/dev', l)
             
             if st=='AKIP,AKIP-2101/2,NDM36GBD4R0064,3.0':
-                self.amp_name =  os.path.join('/dev', l)
+                self.I_M_name =  os.path.join('/dev', l)
             
             if st=='Prist,V7-78/1,TW00023291,03.31-01-0':
                 self.volt_name =  os.path.join('/dev', l)
@@ -116,9 +116,12 @@ class Start:
 class StartWindow(AbstractWindow):
     def __init__(self, parent):
         super().__init__()
-
+        
         self.setWindowTitle('Эффект Холла в полупроводниках')
         self.parent = parent
+        self.parent.a = 0.07/10**3
+        self.parent.dataname = 'data.csv'
+
         self.centralwidget = QWidget()
         self.resize(1400, 800)
         self.setCentralWidget(self.centralwidget)
@@ -130,20 +133,20 @@ class StartWindow(AbstractWindow):
 
         self.flow = QPushButton('Градуировка электромагнита')
         self.flow.clicked.connect(self.flow_click)
-        if not self.parent.foldername or not self.parent.current==0:
-            self.flow.setEnabled(False)
+        # if not self.parent.foldername or not self.parent.current==0:
+        #     self.flow.setEnabled(False)
         self.flow_text = QLabel('Измеряется зависимость тока через электромагнит от магнитной индукции при помощи измерителя магнитной индукции', self)
             
         self.sign = QPushButton('Знак носителей')
         self.sign.clicked.connect(self.sign_click)
-        if not self.parent.current==2:
-            self.sign.setEnabled(False)
+        # if not self.parent.current==2:
+        #     self.sign.setEnabled(False)
         self.sign_text = QLabel('Устанавливается характер проводимости: электронный или дырочный', self)
             
         self.res = QPushButton('Удельная проводимость')
         self.res.clicked.connect(self.res_click)
-        if not self.parent.current==3:
-            self.res.setEnabled(False)
+        # if not self.parent.current==3:
+        #     self.res.setEnabled(False)
         self.res_text = QLabel('Производится измерение оммического сопротивления образца', self)
             
         self.chart = QPushButton('Обработка данных')
@@ -154,8 +157,8 @@ class StartWindow(AbstractWindow):
                        
         self.main = QPushButton('Определение ЭДС Холла')
         self.main.clicked.connect(self.main_click)
-        if not self.parent.current==1:
-            self.main.setEnabled(False)
+        # if not self.parent.current==1:
+        #     self.main.setEnabled(False)
         if self.parent.foldername:
             self.lineEdit.setReadOnly(True)
         self.main_text = QLabel('Определяется ЭДС Холла', self)

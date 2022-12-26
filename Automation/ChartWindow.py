@@ -36,9 +36,9 @@ class ChartWindow(AbstractWindow):
 
         (a, eps) = self.make_grad()
         print(*a)
-        # self.make_main(a, eps)
+        self.make_main(a, eps)
         
-
+        
         self.setWindowTitle('Основной эксперимент. Обработка данных')
         self.resize(1400, 800)
 
@@ -56,9 +56,9 @@ class ChartWindow(AbstractWindow):
         self.text = QTextBrowser()
         text = self.make_text()
         self.parent.text_name = 'Results.txt'
-        # with open(os.path.join(self.parent.folder, self.parent.text_name), 'w') as file:
-        #     file.write(text)
-        # self.text.setText(text)
+        with open(os.path.join(self.parent.folder, self.parent.text_name), 'w') as file:
+            file.write(text)
+        self.text.setText(text)
         print(text)
 
         self.hbox_layout = QGridLayout(self.centralwidget)
@@ -108,8 +108,10 @@ class ChartWindow(AbstractWindow):
         h = self.parent.a
         e = np.array((self.parent.data_main.data['U_34,mV'] -
                       self.parent.data_main.data['U_0,mV'])/10**3)
+        print(e)
         b = np.array(
             self.B(self.parent.data_main.data['I_M,mA']/10**3, a[0], a[1], a[2]))
+        print(b)
         eds = chr(949)
         self.parent.data_main.x = np.array(
             self.parent.data_main.data['I_0,mA']*b)

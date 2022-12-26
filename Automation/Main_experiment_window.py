@@ -69,7 +69,7 @@ class MainWindow(AbstractWindow):
         self.resize(1400, 800)
         self.number_iteration = 1
         self.start_time = 0
-        self.volt = 0.05
+        self.volt = 0
         self.U_0={}
 
         # make masthead
@@ -193,40 +193,53 @@ class MainWindow(AbstractWindow):
         self.parent.ser.write(msg.encode('ascii'))
         time.sleep(1)
         
-        
-        
-        f_amp = open(self.parent.I_M_name, 'w')
-        f_amp.write('Measure:Current:DC?\n')
-        f_amp.close()
-
-        f_volt = open(self.parent.volt_name, 'w')
-        f_volt.write('Measure:Voltage:DC?\n')
-        f_volt.close()
-        f_amp = open(self.parent.amp_name, 'w')
-        f_amp.write('Measure:Current:DC?\n')
-        f_amp.close()
-        
-        f_amp = open(self.parent.I_M_name, 'r')
-        I_M = '{:.9f}'.format(float(f_amp.read(15))*10**3)
-        f_amp.close()
-
-        f_volt = open(self.parent.volt_name, 'r')
-        v = '{:.9f}'.format(float(f_volt.read(15))*10**3)
-        try:
-            self.u_0 = self.U_0[self.volt]
-        except KeyError:
-            self.U_0[self.volt] = v
-            self.u_0 = self.U_0[self.volt]
-        
-        f_amp = open(self.parent.amp_name, 'r')
-        a = '{:.9f}'.format(float(f_amp.read(15))*10**3)
-        print((current_time-self.this_time) )
-        # protect of errors:
-        if float(a) > 1 or self.table.rowCount()>=15*self.number_iteration:
-            self.stop_clicked()
-
-        f_volt.close()
-        f_amp.close()
+        amps=[]
+        volts=[]
+        i_ms=[]
+        for i in range(5):
+            time.sleep(1)
+            f_amp = open(self.parent.I_M_name, 'w')
+            f_amp.write('Measure:Current:DC?\n')
+            f_amp.close()
+    
+            f_volt = open(self.parent.volt_name, 'w')
+            f_volt.write('Measure:Voltage:DC?\n')
+            f_volt.close()
+            f_amp = open(self.parent.amp_name, 'w')
+            f_amp.write('Measure:Current:DC?\n')
+            f_amp.close()
+            time.sleep(1)
+            
+            f_amp = open(self.parent.I_M_name, 'r')
+            I_M = '{:.9f}'.format(float(f_amp.read(15))*10**3)
+            f_amp.close()
+    
+            f_volt = open(self.parent.volt_name, 'r')
+            v = '{:.9f}'.format(float(f_volt.read(15))*10**3)
+            try:
+                self.u_0 = self.U_0[self.volt]
+            except KeyError:
+                self.U_0[self.volt] = v
+                self.u_0 = self.U_0[self.volt]
+            
+            f_amp = open(self.parent.amp_name, 'r')
+            a = '{:.9f}'.format(float(f_amp.read(15))*10**3)
+            # protect of errors:
+            if float(a) > 1 or self.table.rowCount()>=20*self.number_iteration:
+                self.stop_clicked()
+    
+            f_volt.close()
+            f_amp.close()
+            amps.append(float(a))
+            i_ms.append(float(I_M))
+            volts.append(float(v))
+        amps=np.array(amps)
+        i_ms=np.array(i_ms)
+        volts=np.array(volts)
+        print(amps, i_ms, volts)
+        I_M = np.mean(i_ms)
+        v= np.mean(volts)
+        a=np.mean(amps)
         self.save_data([v, I_M, self.u_0, a, self.volt,
                        self.number_iteration, t])
         self.volt += 0.05
