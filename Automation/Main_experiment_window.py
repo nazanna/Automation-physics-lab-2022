@@ -196,8 +196,7 @@ class MainWindow(AbstractWindow):
         amps=[]
         volts=[]
         i_ms=[]
-        for i in range(5):
-            time.sleep(1)
+        for i in range(8):
             f_amp = open(self.parent.I_M_name, 'w')
             f_amp.write('Measure:Current:DC?\n')
             f_amp.close()
@@ -236,13 +235,12 @@ class MainWindow(AbstractWindow):
         amps=np.array(amps)
         i_ms=np.array(i_ms)
         volts=np.array(volts)
-        print(amps, i_ms, volts)
         I_M = np.mean(i_ms)
         v= np.mean(volts)
         a=np.mean(amps)
         self.save_data([v, I_M, self.u_0, a, self.volt,
                        self.number_iteration, t])
-        self.volt += 0.05
+        self.volt += 0.2
 
 
     def closeEvent(self, event):

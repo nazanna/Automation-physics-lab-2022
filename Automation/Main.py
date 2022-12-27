@@ -119,7 +119,7 @@ class StartWindow(AbstractWindow):
         
         self.setWindowTitle('Эффект Холла в полупроводниках')
         self.parent = parent
-        self.parent.a = 0.07/10**3
+        self.parent.a = 0.05/10**3
         self.parent.dataname = 'data.csv'
 
         self.centralwidget = QWidget()
@@ -227,7 +227,8 @@ class StartWindow(AbstractWindow):
         
 
 
-    
+
+
 
 
 start = Start()
