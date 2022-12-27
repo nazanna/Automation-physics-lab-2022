@@ -71,11 +71,10 @@ class ResistanceWindow(AbstractWindow):
     
     def start_clicked(self):
         self.start.setEnabled(False)
-        current=10
-        voltage=15
-        voltage, current = self.measure()
-        print(voltage*self.parent.l*self.parent.a)
-        print(current*self.parent.L)
+        current=0
+        voltage=1
+        # voltage, current = self.measure())
+        self.parent.sigma = 4469
         
         self.parent.sigma = abs(current*self.parent.L/(voltage*self.parent.l*self.parent.a))
         self.parent.sigma_sigma = abs(self.parent.sigma*((5*10**-5)**2+(0.0035/100)**2)**0.5)

@@ -1,6 +1,6 @@
 import os
 import sys
-import serial
+# import serial
 import csv
 import time
 # from PyQt import KeepAspectRatioByExpanding
@@ -36,7 +36,7 @@ class Start:
         
         l = 'usbtmc'+str(1)
         self.I_M_name =  os.path.join('/dev', l)
-        self.add_equip()
+        # self.add_equip()
         
         
         self.draw()
@@ -119,7 +119,10 @@ class StartWindow(AbstractWindow):
         
         self.setWindowTitle('Эффект Холла в полупроводниках')
         self.parent = parent
-        self.parent.a = 0.05/10**3
+        self.parent.a = 2/10**3
+        self.parent.l = 4/10**3
+        self.parent.L = 5/10**3
+        self.parent.sigma = 4469
         self.parent.dataname = 'data.csv'
 
         self.centralwidget = QWidget()

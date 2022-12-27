@@ -116,7 +116,7 @@ class ChartWindow(AbstractWindow):
         self.parent.data_main.x = np.array(
             self.parent.data_main.data['I_0,mA']*b)
         self.parent.data_main.y = e
-        self.parent.data_main.ylabel = eds+'$_x$, mV'
+        self.parent.data_main.ylabel = eds+'$_x$, V'
         self.parent.data_main.xlabel = 'I$_{обр} \cdot B$, мА$\cdot $ Tл'
         self.parent.data_main.make_grafic()
         self.parent.data_main.xerr = abs(
