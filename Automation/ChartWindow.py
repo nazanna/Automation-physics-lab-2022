@@ -66,7 +66,7 @@ class ChartWindow(AbstractWindow):
         self.hbox_layout.addWidget(self.text, 0, 1)
 
     def B(self, x, b, c, d):
-        return x**2*b+x*c+d
+        return 0*x**2*b+x*c+d
 
     def make_grad(self):
         
@@ -77,12 +77,12 @@ class ChartWindow(AbstractWindow):
             self.parent.folder, self.parent.flow_dataname))
         self.parent.data_grad.read_csv()
         self.parent.data_grad.x = np.array(
-            self.parent.data_grad.data['I_M,mA'])
-        self.parent.data_grad.y = np.array(self.parent.data_grad.data['B,mTl'])
+            self.parent.data_grad.data['I_M,mA'])[-10:]
+        self.parent.data_grad.y = np.array(self.parent.data_grad.data['B,mTl'])[-10:]
         self.parent.data_grad.xlabel = 'I$_M$,mA'
         self.parent.data_grad.ylabel = 'B,mTl'
-        self.parent.data_grad.xerr = 0.0035/100*self.parent.data_grad.x
-        self.parent.data_grad.yerr = 0.05*self.parent.data_grad.y
+        self.parent.data_grad.xerr = 0.0035/100*self.parent.data_grad.x[-10:]
+        self.parent.data_grad.yerr = 0.05*self.parent.data_grad.y[-10:]
         plt.figure(dpi=500, figsize=(8, 5))
         self.parent.data_grad.make_point_grafic()
 
@@ -90,6 +90,7 @@ class ChartWindow(AbstractWindow):
             self.B, self.parent.data_grad.x/1000, self.parent.data_grad.y/10**3)
         sigma = abs(np.sqrt(np.diag(sigma))/a)
         eps = (np.min(sigma)**2+(0.0035/100)**2+0.02**2)**0.5
+        print('fit',eps)
         x_range = np.arange(min(self.parent.data_grad.x),
                             max(self.parent.data_grad.x), step=0.001)
         y_fit = self.B(x_range/1000, a[0], a[1], a[2])*10**3
@@ -106,17 +107,17 @@ class ChartWindow(AbstractWindow):
         self.parent.data_main.read_csv()
 
         h = self.parent.a
-        e = np.array((self.parent.data_main.data['U_34,mV'] -
-                      self.parent.data_main.data['U_0,mV'])/10**3)
+        e = -np.array((self.parent.data_main.data['U_34,mV'] -
+                      self.parent.data_main.data['U_0,mV'])*10**3)
         print(e)
         b = np.array(
             self.B(self.parent.data_main.data['I_M,mA']/10**3, a[0], a[1], a[2]))
-        print(b)
+        print('i  ',self.parent.data_main.data['I_0,mA'])
         eds = chr(949)
         self.parent.data_main.x = np.array(
             self.parent.data_main.data['I_0,mA']*b)
         self.parent.data_main.y = e
-        self.parent.data_main.ylabel = eds+'$_x$, V'
+        self.parent.data_main.ylabel = eds+'$_x$, мкV'
         self.parent.data_main.xlabel = 'I$_{обр} \cdot B$, мА$\cdot $ Tл'
         self.parent.data_main.make_grafic()
         self.parent.data_main.xerr = abs(
@@ -124,6 +125,8 @@ class ChartWindow(AbstractWindow):
         self.parent.data_main.yerr = abs(5*10**-5*self.parent.data_main.y)
         self.parent.data_main.through_0 = 0
         k, b1, sigma = self.parent.data_main.make_grafic()
+        k = k * 10**-6
+        sigma[0]*=10**-6
         self.parent.R_H = k*h
         self.parent.sigma_R_H = self.parent.R_H*sigma[0]/k
 

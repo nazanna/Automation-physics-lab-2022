@@ -119,10 +119,11 @@ class StartWindow(AbstractWindow):
         
         self.setWindowTitle('Эффект Холла в полупроводниках')
         self.parent = parent
-        self.parent.a = 2/10**3
-        self.parent.l = 4/10**3
-        self.parent.L = 5/10**3
-        self.parent.sigma = 4469
+        self.parent.a = 0.05/10**3
+        self.parent.l = 7.5/10**3
+        self.parent.L = 8/10**3
+        self.parent.sigma = 6103401*7.5/8
+        self.parent.sigma_sigma = 373
         self.parent.dataname = 'data.csv'
 
         self.centralwidget = QWidget()
